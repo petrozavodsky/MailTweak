@@ -26,10 +26,15 @@ class SettingsPage {
 
 	public function sections() {
 
+		add_settings_section(
+			$this->option_base."_smpt_settings",
+			__("SMTP Settings",$this->textdomine),
+			'',
+			$this->settings_url
+		);
 
 
 	}
-
 
 
 	public function add_settings_page() {
