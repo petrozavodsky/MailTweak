@@ -76,8 +76,21 @@ class SettingsPage {
 			$this->settings_url,
 			$this->option_base . "_smpt_settings",
 			[
-				'type' => 'number',
+				'type' => 'text',
 				'id'   => 'host'
+			]
+		);
+
+
+		add_settings_field(
+			'SMTPSecure',
+			'SMTP encryption',
+			[ $this, 'option_display_settings' ],
+			$this->settings_url,
+			$this->option_base . "_smpt_settings",
+			[
+				'type' => 'text',
+				'id'   => 'SMTPSecure'
 			]
 		);
 	}
@@ -88,6 +101,7 @@ class SettingsPage {
 				'desc' => false,
 				'type' => false,
 				'id'   => false,
+				'vals' => []
 			],
 			$args
 		);
@@ -106,14 +120,23 @@ class SettingsPage {
 				case 'text':
 					echo "<label for='{$args['id']}'>";
 					echo "<input class='regular-text' type='text' id='{$args['id']}' name='{$this->option_base}[{$args['id']}]' value='{$option[$args['id']]}' />";
-					echo ( $args['desc'] != '' ) ? "<br /><span class='description'>{$args['desc']}</span>" : "";
+					echo ( false !== $args['desc'] ) ? "<br /><span class='description'>{$args['desc']}</span>" : "";
 					echo "</label>";
 					break;
 				case 'number':
 					echo "<label for='{$args['id']}'>";
 					echo "<input class='regular-text' type='number' id='{$args['id']}' name='{$this->option_base}[{$args['id']}]' value='{$option[$args['id']]}' />";
-					echo ( $args['desc'] != false ) ? "<br /><span class='description'>{$args['desc']}</span>" : "";
+					echo ( false !== $args['desc'] ) ? "<br /><span class='description'>{$args['desc']}</span>" : "";
 					echo "</label>";
+					break;
+				case 'select':
+					echo "<select id='{$args['id']}' name='{$this->option_base}[{$args['id']}]'>";
+					foreach ( $args['vals'] as $key => $val ) {
+						$selected = selected( $option[ $args['id'] ], $key, false );
+						echo "<option value='$key' $selected>$val</option>";
+					}
+					echo ( false !== $args['desc'] ) ? $args['desc'] : "";
+					echo "</select>";
 					break;
 			}
 		}
