@@ -64,8 +64,8 @@ class SettingsPage {
 			$this->settings_url,
 			$this->option_base . "_smpt_settings",
 			[
-				'type'      => 'number',
-				'id'        => 'port',
+				'type' => 'number',
+				'id'   => 'Port',
 			]
 		);
 
@@ -76,8 +76,8 @@ class SettingsPage {
 			$this->settings_url,
 			$this->option_base . "_smpt_settings",
 			[
-				'type'      => 'number',
-				'id'        => 'host',
+				'type' => 'number',
+				'id'   => 'host'
 			]
 		);
 	}
@@ -92,19 +92,24 @@ class SettingsPage {
 			$args
 		);
 
-		$option = get_option( $this->option_base );
+		$option = get_option( $this->option_base, MailProxy::$options );
+
+		$option = shortcode_atts(
+			MailProxy::$options,
+			$option
+		);
+
+		$option[ $args['id'] ] = esc_attr( stripslashes( $option[ $args['id'] ] ) );
 
 		if ( false !== $args['type'] ) {
 			switch ( $args['type'] ) {
 				case 'text':
-					$option[ $args['id'] ] = esc_attr( stripslashes( $option[ $args['id'] ] ) );
 					echo "<label for='{$args['id']}'>";
 					echo "<input class='regular-text' type='text' id='{$args['id']}' name='{$this->option_base}[{$args['id']}]' value='{$option[$args['id']]}' />";
 					echo ( $args['desc'] != '' ) ? "<br /><span class='description'>{$args['desc']}</span>" : "";
 					echo "</label>";
 					break;
 				case 'number':
-					$option[ $args['id'] ] = esc_attr( stripslashes( $option[ $args['id'] ] ) );
 					echo "<label for='{$args['id']}'>";
 					echo "<input class='regular-text' type='number' id='{$args['id']}' name='{$this->option_base}[{$args['id']}]' value='{$option[$args['id']]}' />";
 					echo ( $args['desc'] != false ) ? "<br /><span class='description'>{$args['desc']}</span>" : "";
