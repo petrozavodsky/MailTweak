@@ -94,7 +94,7 @@ class SettingsPage {
 				case 'number':
 					$option[ $args['id'] ] = esc_attr( stripslashes( $option[ $args['id'] ] ) );
 					echo "<label for='{$args['id']}'>";
-					echo "<input class='regular-text' type='text' id='{$args['id']}' name='{$this->option_base}[{$args['id']}]' value='{$option[$args['id']]}' />";
+					echo "<input class='regular-text' type='number' id='{$args['id']}' name='{$this->option_base}[{$args['id']}]' value='{$option[$args['id']]}' />";
 					echo ( $args['desc'] != false ) ? "<br /><span class='description'>{$args['desc']}</span>" : "";
 					echo "</label>";
 					break;
