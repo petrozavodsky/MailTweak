@@ -26,13 +26,8 @@ class SettingsPage {
 		add_action( 'admin_init', [ $this, 'register_options' ] );
 		add_action( 'admin_init', [ $this, 'sections' ] );
 		add_action( 'admin_init', [ $this, 'fields' ] );
-//		add_action( "update_option_{$this->option_base}", [ $this, 'update_options_helper' ], 10, 2 );
-
 	}
 
-//	public function update_options_helper( $old_value, $value ) {
-//
-//	}
 
 	public function register_options() {
 
