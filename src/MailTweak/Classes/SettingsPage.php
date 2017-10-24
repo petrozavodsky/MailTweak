@@ -84,7 +84,6 @@ class SettingsPage {
 			]
 		);
 
-
 		add_settings_field(
 			'SMTPSecure',
 			'SMTP encryption',
@@ -103,28 +102,47 @@ class SettingsPage {
 		);
 
 		add_settings_field(
-			'Username',
-			'SMTP user',
+			'SMTPAuth',
+			'SMTP auth',
 			[ $this, 'option_display_settings' ],
 			$this->slug_smtp_menu,
 			$this->option_base . "_smpt_settings",
 			[
-				'type' => 'text',
-				'id'   => 'Username'
+				'type' => 'select',
+				'id'   => 'SMTPAuth',
+				'vals' => [
+					'none' => 'None',
+					'yes'  => 'Yes'
+				]
 			]
 		);
 
-		add_settings_field(
-			'Password',
-			'SMTP password',
-			[ $this, 'option_display_settings' ],
-			$this->slug_smtp_menu,
-			$this->option_base . "_smpt_settings",
-			[
-				'type' => 'password',
-				'id'   => 'Password'
-			]
-		);
+		if ( Options::get( 'SMTPAuth' ) === 'yes' ) {
+
+			add_settings_field(
+				'Username',
+				'SMTP user',
+				[ $this, 'option_display_settings' ],
+				$this->slug_smtp_menu,
+				$this->option_base . "_smpt_settings",
+				[
+					'type' => 'text',
+					'id'   => 'Username'
+				]
+			);
+
+			add_settings_field(
+				'Password',
+				'SMTP password',
+				[ $this, 'option_display_settings' ],
+				$this->slug_smtp_menu,
+				$this->option_base . "_smpt_settings",
+				[
+					'type' => 'password',
+					'id'   => 'Password'
+				]
+			);
+		}
 
 		add_settings_field(
 			'From',

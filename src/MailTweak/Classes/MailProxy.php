@@ -18,9 +18,32 @@ class MailProxy {
 	];
 
 	public function __construct() {
-		add_action( 'phpmailer_init', [ $this, 'proxy' ] );
+//		add_action('phpmailer_init', [ $this, 'proxy' ] );
+		add_action('phpmailer_init',[$this, 'wp_smtp']);
 	}
 
+	function wp_smtp($phpmailer){
+		$wsOptions = get_option("wp_smtp_options");;
+		if( !is_email($wsOptions["from"]) || empty($wsOptions["host"]) ){
+			return;
+		}
+		$phpmailer->Mailer = "smtp";
+		$phpmailer->From = $wsOptions["from"];
+		$phpmailer->FromName = $wsOptions["fromname"];
+		$phpmailer->Sender = $phpmailer->From; //Return-Path
+		$phpmailer->AddReplyTo($phpmailer->From,$phpmailer->FromName); //Reply-To
+		$phpmailer->Host = $wsOptions["host"];
+		$phpmailer->SMTPSecure = $wsOptions["smtpsecure"];
+		$phpmailer->Port = $wsOptions["port"];
+		$phpmailer->SMTPAuth = ($wsOptions["smtpauth"]=="yes") ? TRUE : FALSE;
+		if($phpmailer->SMTPAuth){
+			$phpmailer->Username = $wsOptions["username"];
+			$phpmailer->Password = $wsOptions["password"];
+		}
+	}
+
+
+/*
 	public function proxy( $phpmailer ) {
 
 		$options = shortcode_atts(
@@ -28,7 +51,7 @@ class MailProxy {
 			Options::get()
 		);
 
-		if ( is_email( $options['From'] ) !== false && '' !== $options['host'] ) {
+//		if ( is_email( $options['From'] ) !== false && '' !== $options['host'] ) {
 
 			$phpmailer->Mailer     = $options['Mailer'];
 			$phpmailer->Port       = $options['Port'];
@@ -45,11 +68,9 @@ class MailProxy {
 			$phpmailer->From     = $options['From'];
 			$phpmailer->FromName = $options['FromName'];
 			$phpmailer->AddReplyTo( $options['From'], $options['FromName'] );
-		}
-
-		update_option('tt' ,$phpmailer);
+//		}
 
 		return $phpmailer;
 	}
-
+*/
 }
