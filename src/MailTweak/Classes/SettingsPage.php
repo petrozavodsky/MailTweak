@@ -24,13 +24,12 @@ class SettingsPage {
 		add_action( 'admin_init', [ $this, 'register_options' ] );
 		add_action( 'admin_init', [ $this, 'sections' ] );
 		add_action( 'admin_init', [ $this, 'fields' ] );
-		add_action( "update_option_{$this->option_base}", [ $this, 'update_options_helper' ], 10, 2 );
+//		add_action( "update_option_{$this->option_base}", [ $this, 'update_options_helper' ], 10, 2 );
 	}
 
-	public function update_options_helper( $old_value, $value ) {
-
-	}
-
+//	public function update_options_helper( $old_value, $value ) {
+//
+//	}
 
 	public function register_options() {
 
@@ -49,7 +48,6 @@ class SettingsPage {
 			]
 		);
 	}
-
 
 	public function sections() {
 
@@ -206,7 +204,6 @@ class SettingsPage {
 			}
 		}
 	}
-
 
 	public function add_settings_page() {
 		$page = add_options_page(
