@@ -26,6 +26,21 @@ class SettingsPage {
 
 	public function sections() {
 
+		register_setting(
+			$this->option_base."_smpt_settings",
+			$this->option_base,
+			[
+				'sanitize_callback' => function ( $input ) {
+					$valid_input = [];
+					foreach ( $input as $k => $v ) {
+						$valid_input[ $k ] = trim( $v );
+					}
+
+					return $valid_input;
+				}
+			]
+		);
+
 		add_settings_section(
 			$this->option_base."_smpt_settings",
 			__("SMTP Settings",$this->textdomine),
@@ -34,8 +49,22 @@ class SettingsPage {
 		);
 
 
-	}
+		add_settings_field(
+			'Port',
+			'SMTP Port',
+			function ($args){
 
+			},
+			$this->settings_url,
+			$this->option_base."_smpt_settings",
+			[
+				'type'      => 'text',
+				'id'        => 'port',
+				'label_for' => 'port'
+			]
+		);
+
+	}
 
 	public function add_settings_page() {
 		$page = add_options_page(
