@@ -56,7 +56,7 @@ class SettingsPage {
 			$this->settings_url,
 			$this->option_base."_smpt_settings",
 			[
-				'type'      => 'text',
+				'type'      => 'number',
 				'id'        => 'port',
 				'label_for' => 'port'
 			]
@@ -77,6 +77,13 @@ class SettingsPage {
 				$option[ $id ] = esc_attr( stripslashes( $option[ $id ] ) );
 				echo "<label for='{$id}'>";
 				echo "<input class='regular-text' type='text' id='{$id}' name='{$option_name}[{$id}]' value='{$option[$id]}' />";
+				echo ( $desc != '' ) ? "<br /><span class='description'>{$desc}</span>" : "";
+				echo "</label>";
+				break;
+			case 'number':
+				$option[ $id ] = esc_attr( stripslashes( $option[ $id ] ) );
+				echo "<label for='{$id}'>";
+				echo "<input class='regular-text' type='number' id='{$id}' name='{$option_name}[{$id}]' value='{$option[$id]}' />";
 				echo ( $desc != '' ) ? "<br /><span class='description'>{$desc}</span>" : "";
 				echo "</label>";
 				break;
