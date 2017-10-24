@@ -85,6 +85,7 @@ class SettingsPage {
 	public function option_display_settings( $args ) {
 		$args = shortcode_atts(
 			[
+				'desc' => false,
 				'type' => false,
 				'id'   => false,
 			],
