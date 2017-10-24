@@ -52,9 +52,7 @@ class SettingsPage {
 		add_settings_field(
 			'Port',
 			'SMTP Port',
-			function ($args){
-
-			},
+			[$this , 'option_display_settings'],
 			$this->settings_url,
 			$this->option_base."_smpt_settings",
 			[
@@ -65,6 +63,26 @@ class SettingsPage {
 		);
 
 	}
+
+	public function option_display_settings( $args ) {
+		$type        = $args['type'];
+		$id          = $args['id'];
+		$desc        = $args['desc'];
+		$vals        = $args['vals'];
+		$option_name = $this->option_base;
+		$option      = get_option( $option_name );
+
+		switch ( $type ) {
+			case 'text':
+				$option[ $id ] = esc_attr( stripslashes( $option[ $id ] ) );
+				echo "<label for='{$id}'>";
+				echo "<input class='regular-text' type='text' id='{$id}' name='{$option_name}[{$id}]' value='{$option[$id]}' />";
+				echo ( $desc != '' ) ? "<br /><span class='description'>{$desc}</span>" : "";
+				echo "</label>";
+				break;
+		}
+	}
+
 
 	public function add_settings_page() {
 		$page = add_options_page(
