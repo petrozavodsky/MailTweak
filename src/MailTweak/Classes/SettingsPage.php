@@ -27,7 +27,7 @@ class SettingsPage {
 	public function sections() {
 
 		register_setting(
-			$this->option_base."_smpt_settings",
+			$this->option_base . "_smpt_settings",
 			$this->option_base,
 			[
 				'sanitize_callback' => function ( $input ) {
@@ -42,8 +42,8 @@ class SettingsPage {
 		);
 
 		add_settings_section(
-			$this->option_base."_smpt_settings",
-			__("SMTP Settings",$this->textdomine),
+			$this->option_base . "_smpt_settings",
+			__( "SMTP Settings", $this->textdomine ),
 			'',
 			$this->settings_url
 		);
@@ -52,9 +52,9 @@ class SettingsPage {
 		add_settings_field(
 			'Port',
 			'SMTP Port',
-			[$this , 'option_display_settings'],
+			[ $this, 'option_display_settings' ],
 			$this->settings_url,
-			$this->option_base."_smpt_settings",
+			$this->option_base . "_smpt_settings",
 			[
 				'type'      => 'number',
 				'id'        => 'port',
@@ -65,28 +65,34 @@ class SettingsPage {
 	}
 
 	public function option_display_settings( $args ) {
-		$type        = $args['type'];
-		$id          = $args['id'];
-		$desc        = $args['desc'];
-		$vals        = $args['vals'];
-		$option_name = $this->option_base;
-		$option      = get_option( $option_name );
+		$args = shortcode_atts(
+			[
+				'type' => false,
+				'id'   => false,
+				'desc' => false
+			],
+			$args
+		);
 
-		switch ( $type ) {
-			case 'text':
-				$option[ $id ] = esc_attr( stripslashes( $option[ $id ] ) );
-				echo "<label for='{$id}'>";
-				echo "<input class='regular-text' type='text' id='{$id}' name='{$option_name}[{$id}]' value='{$option[$id]}' />";
-				echo ( $desc != '' ) ? "<br /><span class='description'>{$desc}</span>" : "";
-				echo "</label>";
-				break;
-			case 'number':
-				$option[ $id ] = esc_attr( stripslashes( $option[ $id ] ) );
-				echo "<label for='{$id}'>";
-				echo "<input class='regular-text' type='text' id='{$id}' name='{$option_name}[{$id}]' value='{$option[$id]}' />";
-				echo ( $desc != '' ) ? "<br /><span class='description'>{$desc}</span>" : "";
-				echo "</label>";
-				break;
+		$option = get_option( $this->option_base );
+
+		if ( false !== $args['type'] ) {
+			switch ( $args['type'] ) {
+				case 'text':
+					$option[ $args['id'] ] = esc_attr( stripslashes( $option[ $args['id'] ] ) );
+					echo "<label for='{$args['id']}'>";
+					echo "<input class='regular-text' type='text' id='{$args['id']}' name='{$this->option_base}[{$args['id']}]' value='{$option[$args['id']]}' />";
+					echo ( $args['desc'] != '' ) ? "<br /><span class='description'>{$args['desc']}</span>" : "";
+					echo "</label>";
+					break;
+				case 'number':
+					$option[ $args['id'] ] = esc_attr( stripslashes( $option[ $args['id'] ] ) );
+					echo "<label for='{$args['id']}'>";
+					echo "<input class='regular-text' type='text' id='{$args['id']}' name='{$this->option_base}[{$args['id']}]' value='{$option[$args['id']]}' />";
+					echo ( $args['desc'] != false ) ? "<br /><span class='description'>{$args['desc']}</span>" : "";
+					echo "</label>";
+					break;
+			}
 		}
 	}
 
