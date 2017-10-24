@@ -127,13 +127,25 @@ class SettingsPage {
 
 		add_settings_field(
 			'From',
-			'SMTP password',
+			'From',
 			[ $this, 'option_display_settings' ],
 			$this->settings_url,
 			$this->option_base . "_smpt_settings",
 			[
-				'type' => 'password',
-				'id'   => 'Password'
+				'type' => 'text',
+				'id'   => 'From'
+			]
+		);
+
+		add_settings_field(
+			'FromName',
+			'From name',
+			[ $this, 'option_display_settings' ],
+			$this->settings_url,
+			$this->option_base . "_smpt_settings",
+			[
+				'type' => 'text',
+				'id'   => 'FromName'
 			]
 		);
 	}
