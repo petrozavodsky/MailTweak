@@ -15,6 +15,7 @@ class MailProxy {
 		'Password'   => '',
 		'Sender'     => '',
 		'From'       => '',
+		'FromName'   => '',
 		'AddReplyTo' => ''
 	];
 
