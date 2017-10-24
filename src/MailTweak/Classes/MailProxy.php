@@ -19,17 +19,22 @@ class MailProxy {
 
 	public function __construct() {
 		add_action( 'phpmailer_init', [ $this, 'proxy' ] );
+
+		$this->proxy(
+			get_option( 'tt' )
+		);
 	}
 
-	public function proxy( ) {
-		global $mailer;
+	public function proxy( $mailer ) {
 
 		$options = shortcode_atts(
 			self::$options,
 			Options::get()
 		);
 
-		if ( is_email( $options['From'] ) && '' !== $options['host'] ) {
+		d($options['From']);
+
+		if ( is_email( $options['From'] ) !== false  && '' !== $options['host'] ) {
 
 			$mailer->Mailer     = $options['Mailer'];
 			$mailer->Port       = $options['Port'];
@@ -45,8 +50,9 @@ class MailProxy {
 			$mailer->Sender   = $options['From'];
 			$mailer->From     = $options['From'];
 			$mailer->FromName = $options['FromName'];
-			$mailer->AddReplyTo( $options['From'], $options['FromName'] );
+//			$mailer->AddReplyTo( $options['From'], $options['FromName'] );
 		}
+
 
 		return $mailer;
 	}
