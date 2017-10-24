@@ -89,7 +89,7 @@ class SettingsPage {
 			$this->settings_url,
 			$this->option_base . "_smpt_settings",
 			[
-				'type' => 'text',
+				'type' => 'select',
 				'id'   => 'SMTPSecure'
 			]
 		);
@@ -101,7 +101,11 @@ class SettingsPage {
 				'desc' => false,
 				'type' => false,
 				'id'   => false,
-				'vals' => []
+				'vals' => [
+					'none' => 'None',
+					'ssl'  => 'SSL',
+					'tls'  => 'TLS'
+				]
 			],
 			$args
 		);
