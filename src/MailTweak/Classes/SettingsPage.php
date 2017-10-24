@@ -26,7 +26,7 @@ class SettingsPage {
 		add_action( 'admin_init', [ $this, 'fields' ] );
 	}
 
-	public function  register_options(){
+	public function register_options() {
 
 		register_setting(
 			$this->option_base . "_smpt_settings",
@@ -55,7 +55,7 @@ class SettingsPage {
 		);
 	}
 
-	public function fields(){
+	public function fields() {
 
 		add_settings_field(
 			'Port',
@@ -117,7 +117,7 @@ class SettingsPage {
 				echo "<h2>{$title}</h2>";
 				echo "<form method='POST' action='{$url}'>";
 				do_action( 'MailTweak__settings_form_before' );
-				settings_fields( $this->option_base );
+				settings_fields( $this->option_base . "_smpt_settings" );
 				do_settings_sections( $this->settings_url );
 				do_action( 'MailTweak__settings_form_after' );
 				submit_button();
