@@ -15,6 +15,7 @@ new Autoloader( __FILE__, 'MailTweak' );
 use MailTweak\Base\Wrap;
 use MailTweak\Classes\GetTextParser;
 use MailTweak\Classes\MailProxy;
+use MailTweak\Classes\Options;
 use MailTweak\Classes\SettingsPage;
 
 class MailTweak extends Wrap {
@@ -28,6 +29,7 @@ class MailTweak extends Wrap {
 	function __construct() {
 		self::$textdomine = $this->setTextdomain();
 		new MailProxy();
+		new Options(MailProxy::$options , self::$slug );
 		new SettingsPage( self::$slug);
 		new GetTextParser();
 	}
