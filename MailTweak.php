@@ -36,4 +36,4 @@ function MailTweak__init() {
 }
 
 
-
+add_action('plugins_loaded', 'MailTweak__init');

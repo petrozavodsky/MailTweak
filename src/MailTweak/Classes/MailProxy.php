@@ -18,12 +18,13 @@ class MailProxy {
 	];
 
 	public function __construct() {
-//		add_action('phpmailer_init', [ $this, 'proxy' ] );
-
+		add_action('phpmailer_init', [ $this, 'proxy' ] );
 	}
 
 
-/*
+
+
+
 	public function proxy( $phpmailer ) {
 
 		$options = shortcode_atts(
@@ -52,5 +53,5 @@ class MailProxy {
 
 		return $phpmailer;
 	}
-*/
+
 }
