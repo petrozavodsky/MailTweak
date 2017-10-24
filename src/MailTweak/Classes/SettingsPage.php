@@ -25,6 +25,7 @@ class SettingsPage {
 		add_action( 'admin_init', [ $this, 'sections' ] );
 		add_action( 'admin_init', [ $this, 'fields' ] );
 //		add_action( "update_option_{$this->option_base}", [ $this, 'update_options_helper' ], 10, 2 );
+
 	}
 
 //	public function update_options_helper( $old_value, $value ) {
@@ -206,11 +207,12 @@ class SettingsPage {
 	}
 
 	public function add_settings_page() {
-		$page = add_options_page(
-			__( 'SMTP SETTINGS', $this->textdomine ),
-			__( 'SMTP SETTINGS', $this->textdomine ),
+
+		$page = add_menu_page(
+			__( 'Mail Tweak Settings', $this->textdomine ),
+			__( 'Mail Tweak', $this->textdomine ),
 			'activate_plugins',
-			$this->settings_url,
+			$this->slug,
 			function () {
 				$url   = admin_url( 'options.php' );
 				$title = get_admin_page_title();
@@ -224,9 +226,10 @@ class SettingsPage {
 				submit_button();
 				echo "</form>";
 				echo "</div>";
-			}
+			},
+			'dashicons-format-chat',
+			85
 		);
-
 		new SettingsPageAssets( $page, $this->version );
 	}
 }
