@@ -66,7 +66,18 @@ class SettingsPage {
 			[
 				'type'      => 'number',
 				'id'        => 'port',
-				'label_for' => 'port'
+			]
+		);
+
+		add_settings_field(
+			'host',
+			'SMTP host',
+			[ $this, 'option_display_settings' ],
+			$this->settings_url,
+			$this->option_base . "_smpt_settings",
+			[
+				'type'      => 'number',
+				'id'        => 'host',
 			]
 		);
 	}
@@ -76,7 +87,6 @@ class SettingsPage {
 			[
 				'type' => false,
 				'id'   => false,
-				'desc' => false
 			],
 			$args
 		);
