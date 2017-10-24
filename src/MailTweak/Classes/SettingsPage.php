@@ -83,7 +83,7 @@ class SettingsPage {
 			case 'number':
 				$option[ $id ] = esc_attr( stripslashes( $option[ $id ] ) );
 				echo "<label for='{$id}'>";
-				echo "<input class='regular-text' type='text' id='{$id}' name='{$option_name}[{$id}]' value='{$number[$id]}' />";
+				echo "<input class='regular-text' type='text' id='{$id}' name='{$option_name}[{$id}]' value='{$option[$id]}' />";
 				echo ( $desc != '' ) ? "<br /><span class='description'>{$desc}</span>" : "";
 				echo "</label>";
 				break;
