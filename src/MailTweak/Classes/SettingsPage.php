@@ -9,6 +9,7 @@ class SettingsPage {
 
 	private $textdomine;
 	private $slug;
+	private $slug_smtp_menu;
 	private $version;
 	private $settings_url;
 	private $option_base;
@@ -17,6 +18,7 @@ class SettingsPage {
 		$this->slug         = $slug;
 		$this->textdomine   = MailTweak::$textdomine;
 		$this->version      = MailTweak::$textdomine;
+		$this->slug_smtp_menu = $this->slug .'-smtp';
 		$this->settings_url = $this->slug . '-settings';
 		$this->option_base  = $this->slug;
 
@@ -56,7 +58,7 @@ class SettingsPage {
 			$this->option_base . "_smpt_settings",
 			__( "SMTP Settings", $this->textdomine ),
 			'',
-			$this->settings_url
+			$this->slug_smtp_menu
 		);
 
 	}
@@ -67,7 +69,7 @@ class SettingsPage {
 			'Port',
 			'SMTP Port',
 			[ $this, 'option_display_settings' ],
-			$this->settings_url,
+			$this->slug_smtp_menu,
 			$this->option_base . "_smpt_settings",
 			[
 				'type' => 'number',
@@ -79,7 +81,7 @@ class SettingsPage {
 			'host',
 			'SMTP host',
 			[ $this, 'option_display_settings' ],
-			$this->settings_url,
+			$this->slug_smtp_menu,
 			$this->option_base . "_smpt_settings",
 			[
 				'type' => 'text',
@@ -92,7 +94,7 @@ class SettingsPage {
 			'SMTPSecure',
 			'SMTP encryption',
 			[ $this, 'option_display_settings' ],
-			$this->settings_url,
+			$this->slug_smtp_menu,
 			$this->option_base . "_smpt_settings",
 			[
 				'type' => 'select',
@@ -104,7 +106,7 @@ class SettingsPage {
 			'Username',
 			'SMTP user',
 			[ $this, 'option_display_settings' ],
-			$this->settings_url,
+			$this->slug_smtp_menu,
 			$this->option_base . "_smpt_settings",
 			[
 				'type' => 'text',
@@ -116,7 +118,7 @@ class SettingsPage {
 			'Password',
 			'SMTP password',
 			[ $this, 'option_display_settings' ],
-			$this->settings_url,
+			$this->slug_smtp_menu,
 			$this->option_base . "_smpt_settings",
 			[
 				'type' => 'password',
@@ -128,7 +130,7 @@ class SettingsPage {
 			'From',
 			'From',
 			[ $this, 'option_display_settings' ],
-			$this->settings_url,
+			$this->slug_smtp_menu,
 			$this->option_base . "_smpt_settings",
 			[
 				'type' => 'text',
@@ -140,7 +142,7 @@ class SettingsPage {
 			'FromName',
 			'From name',
 			[ $this, 'option_display_settings' ],
-			$this->settings_url,
+			$this->slug_smtp_menu,
 			$this->option_base . "_smpt_settings",
 			[
 				'type' => 'text',
@@ -219,10 +221,10 @@ class SettingsPage {
 				echo "<div class='wrap'>";
 				echo "<h2>{$title}</h2>";
 				echo "<form method='POST' action='{$url}'>";
-				do_action( 'MailTweak__settings_form_before' );
-				settings_fields( $this->option_base . "_smpt_settings" );
+				do_action( 'MailTweak__settings_form_before' , $this->slug);
+				settings_fields( $this->option_base . "_texts_settings");
 				do_settings_sections( $this->settings_url );
-				do_action( 'MailTweak__settings_form_after' );
+				do_action( 'MailTweak__settings_form_after', $this->slug  );
 				submit_button();
 				echo "</form>";
 				echo "</div>";
@@ -230,6 +232,34 @@ class SettingsPage {
 			'dashicons-format-chat',
 			85
 		);
+		$this->add_submenu_page();
+		
 		new SettingsPageAssets( $page, $this->version );
+	}
+
+
+	public function add_submenu_page() {
+		add_submenu_page(
+			$this->slug,
+			__('SMTP Settings',$this->textdomine),
+			__('SMTP', $this->textdomine),
+			'activate_plugins',
+			$this->slug_smtp_menu,
+			function () {
+				$url   = admin_url( 'options.php' );
+				$title = get_admin_page_title();
+				echo "<div class='wrap'>";
+				echo "<h2>{$title}</h2>";
+				echo "<form method='POST' action='{$url}'>";
+				do_action( 'MailTweak__settings_form_before' , 	$this->slug_smtp_menu);
+				settings_fields( $this->option_base . "_smpt_settings" );
+				do_settings_sections( $this->slug_smtp_menu );
+				do_action( 'MailTweak__settings_form_after' ,	$this->slug_smtp_menu );
+				submit_button();
+				echo "</form>";
+				echo "</div>";
+			}
+
+		);
 	}
 }
