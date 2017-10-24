@@ -18,25 +18,19 @@ class MailProxy {
 	];
 
 	public function __construct() {
-		add_action('phpmailer_init', [ $this, 'proxy' ] );
+		add_action( 'phpmailer_init', [ $this, 'proxy' ] );
 	}
 
-
-
-
-
 	public function proxy( $phpmailer ) {
-
 		$options = shortcode_atts(
 			self::$options,
 			Options::get()
 		);
 
-//		if ( is_email( $options['From'] ) !== false && '' !== $options['host'] ) {
-
+		if ( is_email( $options['From'] ) !== false && !empty( $options['host'] ) ) {
 			$phpmailer->Mailer     = $options['Mailer'];
 			$phpmailer->Port       = $options['Port'];
-			$phpmailer->host       = $options['host'];
+			$phpmailer->Host       = $options['host'];
 			$phpmailer->SMTPSecure = $options['SMTPSecure'];
 			$phpmailer->SMTPAuth   = ( Options::get( 'SMTPAuth' ) === 'yes' ? true : false );
 
@@ -49,9 +43,8 @@ class MailProxy {
 			$phpmailer->From     = $options['From'];
 			$phpmailer->FromName = $options['FromName'];
 			$phpmailer->AddReplyTo( $options['From'], $options['FromName'] );
-//		}
+		}
 
-		return $phpmailer;
 	}
-
 }
+
