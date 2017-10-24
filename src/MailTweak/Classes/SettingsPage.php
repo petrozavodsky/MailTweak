@@ -24,13 +24,13 @@ class SettingsPage {
 		add_action( 'admin_init', [ $this, 'register_options' ] );
 		add_action( 'admin_init', [ $this, 'sections' ] );
 		add_action( 'admin_init', [ $this, 'fields' ] );
-
 		add_action( "update_option_{$this->option_base}", [ $this, 'update_options_helper' ], 10, 2 );
 	}
 
-	public function update_options_helper($old_value, $value){
+	public function update_options_helper( $old_value, $value ) {
 
 	}
+
 
 	public function register_options() {
 
@@ -59,7 +59,6 @@ class SettingsPage {
 			'',
 			$this->settings_url
 		);
-
 
 	}
 
@@ -101,6 +100,42 @@ class SettingsPage {
 				'id'   => 'SMTPSecure'
 			]
 		);
+
+		add_settings_field(
+			'Username',
+			'SMTP user',
+			[ $this, 'option_display_settings' ],
+			$this->settings_url,
+			$this->option_base . "_smpt_settings",
+			[
+				'type' => 'text',
+				'id'   => 'Username'
+			]
+		);
+
+		add_settings_field(
+			'Password',
+			'SMTP password',
+			[ $this, 'option_display_settings' ],
+			$this->settings_url,
+			$this->option_base . "_smpt_settings",
+			[
+				'type' => 'password',
+				'id'   => 'Password'
+			]
+		);
+
+		add_settings_field(
+			'From',
+			'SMTP password',
+			[ $this, 'option_display_settings' ],
+			$this->settings_url,
+			$this->option_base . "_smpt_settings",
+			[
+				'type' => 'password',
+				'id'   => 'Password'
+			]
+		);
 	}
 
 	public function option_display_settings( $args ) {
@@ -129,6 +164,12 @@ class SettingsPage {
 
 		if ( false !== $args['type'] ) {
 			switch ( $args['type'] ) {
+				case 'password':
+					echo "<label for='{$args['id']}'>";
+					echo "<input class='regular-text' type='password' id='{$args['id']}' name='{$this->option_base}[{$args['id']}]' value='{$option[$args['id']]}' />";
+					echo ( false !== $args['desc'] ) ? "<br /><span class='description'>{$args['desc']}</span>" : "";
+					echo "</label>";
+					break;
 				case 'text':
 					echo "<label for='{$args['id']}'>";
 					echo "<input class='regular-text' type='text' id='{$args['id']}' name='{$this->option_base}[{$args['id']}]' value='{$option[$args['id']]}' />";
