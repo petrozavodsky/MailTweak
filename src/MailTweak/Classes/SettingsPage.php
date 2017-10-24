@@ -47,5 +47,6 @@ class SettingsPage {
 			}
 		);
 
+		new SettingsPageAssets( $page, $this->version );
 	}
 }
