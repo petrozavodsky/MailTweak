@@ -21,8 +21,15 @@ class SettingsPage {
 		$this->option_base  = $this->slug;
 
 		add_action( 'admin_menu', [ $this, 'add_settings_page' ] );
+		add_action( 'admin_init', [ $this, 'sections' ] );
+	}
+
+	public function sections() {
+
+
 
 	}
+
 
 
 	public function add_settings_page() {
