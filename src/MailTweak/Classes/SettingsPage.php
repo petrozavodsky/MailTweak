@@ -15,12 +15,12 @@ class SettingsPage {
 	private $option_base;
 
 	public function __construct( $slug ) {
-		$this->slug         = $slug;
-		$this->textdomine   = MailTweak::$textdomine;
-		$this->version      = MailTweak::$textdomine;
-		$this->slug_smtp_menu = $this->slug .'-smtp';
-		$this->settings_url = $this->slug . '-settings';
-		$this->option_base  = $this->slug;
+		$this->slug           = $slug;
+		$this->textdomine     = MailTweak::$textdomine;
+		$this->version        = MailTweak::$textdomine;
+		$this->slug_smtp_menu = $this->slug . '-smtp';
+		$this->settings_url   = $this->slug . '-settings';
+		$this->option_base    = $this->slug;
 
 		add_action( 'admin_menu', [ $this, 'add_settings_page' ] );
 		add_action( 'admin_init', [ $this, 'register_options' ] );
@@ -93,7 +93,12 @@ class SettingsPage {
 			$this->option_base . "_smpt_settings",
 			[
 				'type' => 'select',
-				'id'   => 'SMTPSecure'
+				'id'   => 'SMTPSecure',
+				'vals' => [
+					'none' => 'None',
+					'ssl'  => 'SSL',
+					'tls'  => 'TLS'
+				]
 			]
 		);
 
@@ -152,11 +157,7 @@ class SettingsPage {
 				'desc' => false,
 				'type' => false,
 				'id'   => false,
-				'vals' => [
-					'none' => 'None',
-					'ssl'  => 'SSL',
-					'tls'  => 'TLS'
-				]
+				'vals' => []
 			],
 			$args
 		);
@@ -216,10 +217,10 @@ class SettingsPage {
 				echo "<div class='wrap'>";
 				echo "<h2>{$title}</h2>";
 				echo "<form method='POST' action='{$url}'>";
-				do_action( 'MailTweak__settings_form_before' , $this->slug);
-				settings_fields( $this->option_base . "_texts_settings");
+				do_action( 'MailTweak__settings_form_before', $this->slug );
+				settings_fields( $this->option_base . "_texts_settings" );
 				do_settings_sections( $this->settings_url );
-				do_action( 'MailTweak__settings_form_after', $this->slug  );
+				do_action( 'MailTweak__settings_form_after', $this->slug );
 				submit_button();
 				echo "</form>";
 				echo "</div>";
@@ -228,7 +229,7 @@ class SettingsPage {
 			85
 		);
 		$this->add_submenu_page();
-		
+
 		new SettingsPageAssets( $page, $this->version );
 	}
 
@@ -236,8 +237,8 @@ class SettingsPage {
 	public function add_submenu_page() {
 		add_submenu_page(
 			$this->slug,
-			__('SMTP Settings',$this->textdomine),
-			__('SMTP', $this->textdomine),
+			__( 'SMTP Settings', $this->textdomine ),
+			__( 'SMTP', $this->textdomine ),
 			'activate_plugins',
 			$this->slug_smtp_menu,
 			function () {
@@ -246,10 +247,10 @@ class SettingsPage {
 				echo "<div class='wrap'>";
 				echo "<h2>{$title}</h2>";
 				echo "<form method='POST' action='{$url}'>";
-				do_action( 'MailTweak__settings_form_before' , 	$this->slug_smtp_menu);
+				do_action( 'MailTweak__settings_form_before', $this->slug_smtp_menu );
 				settings_fields( $this->option_base . "_smpt_settings" );
 				do_settings_sections( $this->slug_smtp_menu );
-				do_action( 'MailTweak__settings_form_after' ,	$this->slug_smtp_menu );
+				do_action( 'MailTweak__settings_form_after', $this->slug_smtp_menu );
 				submit_button();
 				echo "</form>";
 				echo "</div>";
