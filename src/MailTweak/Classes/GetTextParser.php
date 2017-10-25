@@ -17,7 +17,7 @@ class GetTextParser {
 
 		$this->patterns = [
 			'[%s] New User Registration'              => [ 'new_user_register', __( 'New user create', MailTweak::$textdomine ) ],
-			'[%s] Password Reset'                     => [ 'new_password', __( 'Resset password', MailTweak::$textdomine ) ],
+			'[%s] Password Reset'                     => [ 'reset_password', __( 'Resset password', MailTweak::$textdomine ) ],
 			'[%s] Notice of Password Change'          => [ 'change_password_alert', __( 'New password created (user alert)', MailTweak::$textdomine ) ],
 			'[%s] Your username and password info'    => [ 'create_new_user', __( 'New password register (admin alert)', MailTweak::$textdomine ) ],
 			'[%1$s] Please moderate: \"%2$s\"'        => [ 'comment_added', __( 'Comment added', MailTweak::$textdomine ) ],

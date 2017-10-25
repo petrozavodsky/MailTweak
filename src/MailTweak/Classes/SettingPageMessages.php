@@ -88,6 +88,19 @@ class SettingPageMessages {
 		);
 
 		add_settings_field(
+			$id . "-subject",
+			__( 'Message subject', $this->textdomine ),
+			[ $this, 'option_display_settings' ],
+			$this->slug,
+			$section,
+			[
+				'type' => 'text',
+				'id'   => $id . "-subject",
+			]
+		);
+
+
+		add_settings_field(
 			$id."-message",
 			__( 'Message', $this->textdomine ),
 			[ $this, 'option_display_settings' ],
