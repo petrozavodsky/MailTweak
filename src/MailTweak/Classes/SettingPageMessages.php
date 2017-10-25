@@ -23,12 +23,13 @@ class SettingPageMessages {
 		add_action( 'admin_init', [ $this, 'register_options' ] );
 		add_action( 'admin_init', [ $this, 'sections' ] );
 		add_action( 'admin_init', [ $this, 'fields' ] );
+
 	}
 
 
-private function generate_rows(){
-
-}
+	private function generate_rows() {
+		$paterns = GetTextParser::$paterns;
+	}
 
 	public function register_options() {
 
