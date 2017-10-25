@@ -15,6 +15,7 @@ new Autoloader( __FILE__, 'MailTweak' );
 use MailTweak\Base\Wrap;
 use MailTweak\Classes\GetTextParser;
 use MailTweak\Classes\MailProxy;
+use MailTweak\Classes\MessageMapper;
 use MailTweak\Classes\SettingPageMessages;
 use MailTweak\Classes\SettingsPage;
 use MailTweak\Classes\CommentApprovedAlert;
@@ -30,9 +31,11 @@ class MailTweak extends Wrap {
 		new MailProxy();
 		new CommentApprovedAlert();
 		$parser = new GetTextParser();
-		$this->patterns = $parser->paterns;
-
+		$this->patterns = $parser->patterns;
 		$this->admin_menu();
+
+		new MessageMapper();
+
 	}
 
 	public function admin_menu() {
