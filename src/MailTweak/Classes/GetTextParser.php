@@ -8,6 +8,7 @@ class GetTextParser {
 	public $percent_similar = 90;
 
 	public $paterns =[
+		'[%s] Password Reset' => 'new_password',
 		'[%s] Notice of Password Change' => 'change_password_alert',
 		'[%s] Your username and password info' => 'create_new_user'
 	];
