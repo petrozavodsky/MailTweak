@@ -26,13 +26,10 @@ class GetTextParser {
 
 			add_filter( 'wp_mail', function ( $array ) use ( $text ) {
 				$array['message'] = $this->paterns[ $text ];
-
 				return $array;
 			} );
-
 		}
 
 		return $translation;
 	}
-
 }
