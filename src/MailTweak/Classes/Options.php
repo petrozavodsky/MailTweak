@@ -8,9 +8,19 @@ use MailTweak;
 class Options {
 
 
-	public static function get( $key = false ) {
+	public static function get( $key = false, $type = 'smtp' ) {
 
-		$options = get_option( MailTweak::$slug, MailProxy::$options );
+		if ( 'smtp' === $type ) {
+			$options = get_option( MailTweak::$slug, MailProxy::$options );
+		} elseif ( 'messages' === $type ) {
+			$options = get_option( MailTweak::$slug . '_texts_settings', [] );
+		} else {
+			return false;
+		}
+
+		if ( 'all' === $key ) {
+			return $options;
+		}
 
 		if ( false !== $key && array_key_exists( $key, $options ) ) {
 			return $options[ $key ];

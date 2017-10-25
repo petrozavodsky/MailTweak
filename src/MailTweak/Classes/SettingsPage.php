@@ -190,7 +190,7 @@ class SettingsPage {
 			$this->slug,
 			function () {
 				$url   = admin_url( 'options.php' );
-				$title = get_get_admin_page_title();
+				$title = get_admin_page_title();
 				echo "<div class='wrap'>";
 				echo "<h2>{$title}</h2>";
 				echo "<form method='POST' action='{$url}'>";
