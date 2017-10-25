@@ -27,7 +27,7 @@ class MailProxy {
 			Options::get()
 		);
 
-		if ( is_email( $options['From'] ) !== false && !empty( $options['host'] ) ) {
+		if ( is_email( $options['From'] ) !== false && ! empty( $options['host'] ) ) {
 			$phpmailer->Mailer     = $options['Mailer'];
 			$phpmailer->Port       = $options['Port'];
 			$phpmailer->Host       = $options['host'];

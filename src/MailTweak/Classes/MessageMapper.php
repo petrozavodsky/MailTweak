@@ -31,6 +31,9 @@ class MessageMapper {
 				$mail_args['subject'] = $subject;
 			}
 
+			if($from_name){
+
+			}
 
 		}
 
