@@ -7,7 +7,7 @@ class GetTextParser {
 
 	public $percent_similar = 90;
 
-	public $paterns = [
+	public static $paterns = [
 		'[%s] New User Registration'              => 'new_user_register',
 		'[%s] Password Reset'                     => 'new_password',
 		'[%s] Notice of Password Change'          => 'change_password_alert',
@@ -22,10 +22,12 @@ class GetTextParser {
 
 
 	public function get_data( $translation, $text, $domain ) {
-		if ( array_key_exists( $text, $this->paterns ) ) {
+		$paterns = self::$paterns;
+		if ( array_key_exists( $text, $paterns ) ) {
 
-			add_filter( 'wp_mail', function ( $array ) use ( $text ) {
-				$array['message'] = $this->paterns[ $text ];
+			add_filter( 'wp_mail', function ( $array ) use ( $paterns, $text ) {
+				$array['message'] = $paterns[ $text ];
+
 				return $array;
 			} );
 		}

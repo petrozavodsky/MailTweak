@@ -7,17 +7,17 @@ use MailTweak;
 
 class SettingsPage {
 
+	public $slug;
+	public $version;
 	private $textdomine;
-	private $slug;
 	private $slug_smtp_menu;
-	private $version;
 	private $settings_url;
 	private $option_base;
 
 	public function __construct( $slug ) {
 		$this->slug           = $slug;
 		$this->textdomine     = MailTweak::$textdomine;
-		$this->version        = MailTweak::$textdomine;
+		$this->version        = "1.0.0";
 		$this->slug_smtp_menu = $this->slug . '-smtp';
 		$this->settings_url   = $this->slug . '-settings';
 		$this->option_base    = $this->slug;
@@ -27,7 +27,6 @@ class SettingsPage {
 		add_action( 'admin_init', [ $this, 'sections' ] );
 		add_action( 'admin_init', [ $this, 'fields' ] );
 	}
-
 
 	public function register_options() {
 
@@ -51,7 +50,7 @@ class SettingsPage {
 
 		add_settings_section(
 			$this->option_base . "_smpt_settings",
-			__( "SMTP Settings", $this->textdomine ),
+			__( "SMTP sender options", $this->textdomine ),
 			'',
 			$this->slug_smtp_menu
 		);
@@ -169,7 +168,7 @@ class SettingsPage {
 		);
 	}
 
-	public function option_display_settings( $args ) {
+	public function option_display_settings( $args, $option_name = false ) {
 		$args = shortcode_atts(
 			[
 				'desc' => false,
@@ -180,7 +179,11 @@ class SettingsPage {
 			$args
 		);
 
-		$option = get_option( $this->option_base, MailProxy::$options );
+		if ( false == $option_name ) {
+			$option_name = $this->option_base;
+		}
+
+		$option = get_option( $option_name, MailProxy::$options );
 
 		$option = shortcode_atts(
 			MailProxy::$options,
@@ -191,26 +194,40 @@ class SettingsPage {
 
 		if ( false !== $args['type'] ) {
 			switch ( $args['type'] ) {
+				case 'texteditor':
+					$editor_id = mb_strtolower( str_replace( [ '-', '_' ], '', $args['id'] ) );
+					wp_editor(
+						$option[ $args['id'] ],
+						$editor_id,
+						[
+							'wpautop'       => false,
+							'media_buttons' => false,
+							'textarea_name' => "{$option_name}[{$args['id']}]",
+							'textarea_rows' => 8,
+							'tinymce'       => false
+						]
+					);
+					break;
 				case 'password':
 					echo "<label for='{$args['id']}'>";
-					echo "<input class='regular-text' type='password' id='{$args['id']}' name='{$this->option_base}[{$args['id']}]' value='{$option[$args['id']]}' />";
+					echo "<input class='regular-text' type='password' id='{$args['id']}' name='{$option_name}[{$args['id']}]' value='{$option[$args['id']]}' />";
 					echo ( false !== $args['desc'] ) ? "<br /><span class='description'>{$args['desc']}</span>" : "";
 					echo "</label>";
 					break;
 				case 'text':
 					echo "<label for='{$args['id']}'>";
-					echo "<input class='regular-text' type='text' id='{$args['id']}' name='{$this->option_base}[{$args['id']}]' value='{$option[$args['id']]}' />";
+					echo "<input class='regular-text' type='text' id='{$args['id']}' name='{$option_name}[{$args['id']}]' value='{$option[$args['id']]}' />";
 					echo ( false !== $args['desc'] ) ? "<br /><span class='description'>{$args['desc']}</span>" : "";
 					echo "</label>";
 					break;
 				case 'number':
 					echo "<label for='{$args['id']}'>";
-					echo "<input class='regular-text' type='number' id='{$args['id']}' name='{$this->option_base}[{$args['id']}]' value='{$option[$args['id']]}' />";
+					echo "<input class='regular-text' type='number' id='{$args['id']}' name='{$option_name}[{$args['id']}]' value='{$option[$args['id']]}' />";
 					echo ( false !== $args['desc'] ) ? "<br /><span class='description'>{$args['desc']}</span>" : "";
 					echo "</label>";
 					break;
 				case 'select':
-					echo "<select id='{$args['id']}' name='{$this->option_base}[{$args['id']}]'>";
+					echo "<select id='{$args['id']}' name='{$option_name}[{$args['id']}]'>";
 					foreach ( $args['vals'] as $key => $val ) {
 						$selected = selected( $option[ $args['id'] ], $key, false );
 						echo "<option value='$key' $selected>$val</option>";
@@ -237,7 +254,7 @@ class SettingsPage {
 				echo "<form method='POST' action='{$url}'>";
 				do_action( 'MailTweak__settings_form_before', $this->slug );
 				settings_fields( $this->option_base . "_texts_settings" );
-				do_settings_sections( $this->settings_url );
+				do_settings_sections( $this->slug );
 				do_action( 'MailTweak__settings_form_after', $this->slug );
 				submit_button();
 				echo "</form>";
@@ -248,9 +265,9 @@ class SettingsPage {
 		);
 		$this->add_submenu_page();
 
+
 		new SettingsPageAssets( $page, $this->version );
 	}
-
 
 	public function add_submenu_page() {
 		add_submenu_page(
