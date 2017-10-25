@@ -10,6 +10,10 @@ class MapperHelper {
 	public function __construct() {
 
 		add_filter( 'retrieve_password_message', [ $this, 'reset_password' ], 10, 4 );
+		add_action( 'retrieve_password_key', [ $this, 'create_new_user' ] );
+	}
+
+	public function create_new_user( $user_login, $key) {
 
 	}
 
