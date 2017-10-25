@@ -9,13 +9,13 @@ class GetTextParser {
 
 	public $percent_similar = 90;
 
-	public $paterns = [];
+	public $patterns = [];
 
 
 	public function __construct() {
 		add_filter( 'gettext', [ $this, "get_data" ], 10, 2 );
 
-		$this->paterns = [
+		$this->patterns = [
 			'[%s] New User Registration'              => [ 'new_user_register', __( 'New user create', MailTweak::$textdomine ) ],
 			'[%s] Password Reset'                     => [ 'new_password', __( 'New user register', MailTweak::$textdomine ) ],
 			'[%s] Notice of Password Change'          => [ 'change_password_alert', __( 'New password created (user alert)', MailTweak::$textdomine ) ],
@@ -27,13 +27,12 @@ class GetTextParser {
 	}
 
 	public function get_data( $translation, $text) {
-		$paterns = $this->paterns;
+		$patterns = $this->patterns;
 
-		if ( array_key_exists( $text, $paterns ) ) {
+		if ( array_key_exists( $text, $patterns ) ) {
 
-			add_filter( 'wp_mail', function ( $array ) use ( $paterns, $text ) {
-				$array['message'] = apply_filters( 'MailTweak__message_send', $paterns[ $text ], $text );
-
+			add_filter( 'wp_mail', function ( $array ) use ( $patterns, $text ) {
+				$array = apply_filters( 'MailTweak__message_send', $array , $patterns[ $text ][0], $text );
 				return $array;
 			} );
 		}
