@@ -64,8 +64,8 @@ class SettingPageMessages {
 		);
 
 		add_settings_field(
-			$id . "-email",
-			__( 'From', $this->textdomine ),
+			$id . "-from-email",
+			__( 'From email', $this->textdomine ),
 			[ $this, 'option_display_settings' ],
 			$this->slug,
 			$section,
@@ -74,7 +74,6 @@ class SettingPageMessages {
 				'id'   => $id . "-email",
 			]
 		);
-
 
 		add_settings_field(
 			$id . "-from-name",
@@ -93,7 +92,7 @@ class SettingPageMessages {
 			__( 'Message', $this->textdomine ),
 			[ $this, 'option_display_settings' ],
 			$this->slug,
-			$this->option_base."-".$id,
+			$section,
 			[
 				'type' => 'texteditor',
 				'id'   => $id,

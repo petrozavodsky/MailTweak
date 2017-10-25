@@ -40,5 +40,4 @@ class GetTextParser {
 
 		return $translation;
 	}
-
 }
