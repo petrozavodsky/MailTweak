@@ -26,7 +26,7 @@ class MailTweak extends Wrap {
 		self::$textdomine = $this->setTextdomain();
 		new MailProxy();
 		new SettingsPage( self::$slug );
-//		new GetTextParser();
+		new GetTextParser();
 	}
 
 }
