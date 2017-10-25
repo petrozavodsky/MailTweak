@@ -7,10 +7,13 @@ class GetTextParser {
 
 	public $percent_similar = 90;
 
-	public $paterns =[
-		'[%s] Password Reset' => 'new_password',
-		'[%s] Notice of Password Change' => 'change_password_alert',
-		'[%s] Your username and password info' => 'create_new_user'
+	public $paterns = [
+		'[%s] New User Registration'              => 'new_user_register',
+		'[%s] Password Reset'                     => 'new_password',
+		'[%s] Notice of Password Change'          => 'change_password_alert',
+		'[%s] Your username and password info'    => 'create_new_user',
+		'[%1$s] Please moderate: \"%2$s\"'        => 'comment_added',
+		'Hi %1$s, comment %2$s has been approved' => 'comment_approved'
 	];
 
 	public function __construct() {
@@ -19,10 +22,11 @@ class GetTextParser {
 
 
 	public function get_data( $translation, $text, $domain ) {
-		if ( array_key_exists($text , $this->paterns)    ) {
+		if ( array_key_exists( $text, $this->paterns ) ) {
 
 			add_filter( 'wp_mail', function ( $array ) use ( $text ) {
-				$array['message'] = $this->paterns[$text];
+				$array['message'] = $this->paterns[ $text ];
+
 				return $array;
 			} );
 
@@ -30,13 +34,5 @@ class GetTextParser {
 
 		return $translation;
 	}
-
-	private function prepare( $string ) {
-		$string = trim( $string );
-		$string = preg_replace( '|[\s]+|s', ' ', $string );
-
-		return $string;
-	}
-
 
 }
