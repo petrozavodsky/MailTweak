@@ -88,14 +88,14 @@ class SettingPageMessages {
 		);
 
 		add_settings_field(
-			$id,
+			$id."-message",
 			__( 'Message', $this->textdomine ),
 			[ $this, 'option_display_settings' ],
 			$this->slug,
 			$section,
 			[
 				'type' => 'texteditor',
-				'id'   => $id,
+				'id'   => $id."-message",
 			]
 		);
 

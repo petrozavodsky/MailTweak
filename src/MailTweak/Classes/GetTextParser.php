@@ -13,7 +13,7 @@ class GetTextParser {
 
 
 	public function __construct() {
-		add_filter( 'gettext', [ $this, "get_data" ], 10, 3 );
+		add_filter( 'gettext', [ $this, "get_data" ], 10, 2 );
 
 		$this->paterns = [
 			'[%s] New User Registration'              => [ 'new_user_register', __( 'New user create', MailTweak::$textdomine ) ],
@@ -26,7 +26,7 @@ class GetTextParser {
 
 	}
 
-	public function get_data( $translation, $text, $domain ) {
+	public function get_data( $translation, $text) {
 		$paterns = $this->paterns;
 
 		if ( array_key_exists( $text, $paterns ) ) {
