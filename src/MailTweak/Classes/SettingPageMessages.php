@@ -24,9 +24,6 @@ class SettingPageMessages {
 		$this->patterns    = $patterns;
 
 		add_action( 'admin_init', [ $this, 'register_options' ] );
-//		add_action( 'admin_init', [ $this, 'sections' ] );
-//		add_action( 'admin_init', [ $this, 'fields' ] );
-
 		add_action( 'admin_init', [ $this, 'generate_rows' ] );
 
 	}
@@ -67,14 +64,51 @@ class SettingPageMessages {
 		);
 
 		add_settings_field(
-			$id,
+			$id . "-from-email",
+			__( 'From email', $this->textdomine ),
+			[ $this, 'option_display_settings' ],
+			$this->slug,
+			$section,
+			[
+				'type' => 'email',
+				'id'   => $id . "-email",
+			]
+		);
+
+		add_settings_field(
+			$id . "-from-name",
+			__( 'From name', $this->textdomine ),
+			[ $this, 'option_display_settings' ],
+			$this->slug,
+			$section,
+			[
+				'type' => 'text',
+				'id'   => $id . "-from-name",
+			]
+		);
+
+		add_settings_field(
+			$id . "-subject",
+			__( 'Message subject', $this->textdomine ),
+			[ $this, 'option_display_settings' ],
+			$this->slug,
+			$section,
+			[
+				'type' => 'text',
+				'id'   => $id . "-subject",
+			]
+		);
+
+
+		add_settings_field(
+			$id."-message",
 			__( 'Message', $this->textdomine ),
 			[ $this, 'option_display_settings' ],
 			$this->slug,
-			$this->option_base."-".$id,
+			$section,
 			[
 				'type' => 'texteditor',
-				'id'   => $id,
+				'id'   => $id."-message",
 			]
 		);
 
@@ -97,31 +131,6 @@ class SettingPageMessages {
 		);
 	}
 
-	public function sections() {
-
-		add_settings_section(
-			$this->option_base,
-			__( "Settings alert message templates", $this->textdomine ),
-			'',
-			$this->slug
-		);
-
-	}
-
-	public function fields() {
-
-		add_settings_field(
-			'Port',
-			'SMTP Port',
-			[ $this, 'option_display_settings' ],
-			$this->slug,
-			$this->option_base,
-			[
-				'type' => 'texteditor',
-				'id'   => 'Port',
-			]
-		);
-	}
 
 	public function option_display_settings( $args ) {
 

@@ -15,6 +15,8 @@ new Autoloader( __FILE__, 'MailTweak' );
 use MailTweak\Base\Wrap;
 use MailTweak\Classes\GetTextParser;
 use MailTweak\Classes\MailProxy;
+use MailTweak\Classes\MapperHelper;
+use MailTweak\Classes\MessageMapper;
 use MailTweak\Classes\SettingPageMessages;
 use MailTweak\Classes\SettingsPage;
 use MailTweak\Classes\CommentApprovedAlert;
@@ -24,21 +26,27 @@ class MailTweak extends Wrap {
 	public static $textdomine;
 	public static $slug = 'mail-tweak';
 	public $patterns = [];
+	public $mapper_state = [];
 
 	public function __construct() {
 		self::$textdomine = $this->setTextdomain();
 		new MailProxy();
 		new CommentApprovedAlert();
-		$parser = new GetTextParser();
-		$this->patterns = $parser->paterns;
-
+		$parser         = new GetTextParser();
+		$this->patterns = $parser->patterns;
 		$this->admin_menu();
+
+		$mapper_helper = new MapperHelper();
+		$this->mapper_state = $mapper_helper->set_state( $this->mapper_state );
+
+		new MessageMapper();
+
 	}
 
 	public function admin_menu() {
 		$menu_page = new SettingsPage( self::$slug );
 
-		new SettingPageMessages( $menu_page , $this->patterns );
+		new SettingPageMessages( $menu_page, $this->patterns );
 
 	}
 

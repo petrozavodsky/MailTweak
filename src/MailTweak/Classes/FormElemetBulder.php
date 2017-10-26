@@ -50,6 +50,12 @@ trait FormElemetBulder {
 					echo ( false !== $args['desc'] ) ? "<br /><span class='description'>{$args['desc']}</span>" : "";
 					echo "</label>";
 					break;
+				case 'email':
+					echo "<label for='{$args['id']}'>";
+					echo "<input class='regular-text' type='email' id='{$args['id']}' name='{$option_name}[{$args['id']}]' value='{$option[$args['id']]}' />";
+					echo ( false !== $args['desc'] ) ? "<br /><span class='description'>{$args['desc']}</span>" : "";
+					echo "</label>";
+					break;
 				case 'text':
 					echo "<label for='{$args['id']}'>";
 					echo "<input class='regular-text' type='text' id='{$args['id']}' name='{$option_name}[{$args['id']}]' value='{$option[$args['id']]}' />";
