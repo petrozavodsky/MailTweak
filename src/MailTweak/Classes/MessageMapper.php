@@ -10,16 +10,22 @@ class MessageMapper {
 	private $options_smpt = [];
 
 	public function __construct() {
-
 		$this->options_smpt = Options::get( 'all' );
 		add_filter( 'MailTweak__message_send', [ $this, 'init' ], 10, 3 );
+
+		d(
+			get_option( 'vv' )
+		);
 	}
 
 	public function init( $mail_args, $type, $raw_text ) {
+		global $MailTweak_MapperHelper_tmp;
 
 		$options = get_option( MailTweak::$slug . "_texts_settings" );
 
 		if ( 'on' === $this->option_extractor( 'status', $type, $options ) ) {
+
+			update_option( 'vv', $MailTweak_MapperHelper_tmp );
 
 			$from_name = $this->options_smpt['FromName'];
 			$from      = $this->options_smpt['From'];
@@ -64,6 +70,7 @@ class MessageMapper {
 
 	public function option_extractor( $field, $type, $options = [] ) {
 
+
 		if ( is_array( $options ) && 0 < count( $options ) && array_key_exists( $type . '-' . $field, $options ) ) {
 
 			if ( 'email' === $field ) {
@@ -80,8 +87,12 @@ class MessageMapper {
 				}
 			}
 
-
-			return $options[ $type . '-' . $field ];
+			return apply_filters(
+				'MailTweak__message_mapper_filds_extractor_filter',
+				$options[ $type . '-' . $field ],
+				$type,
+				$field
+			);
 		}
 
 		return false;

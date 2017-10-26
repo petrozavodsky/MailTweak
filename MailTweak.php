@@ -35,21 +35,15 @@ class MailTweak extends Wrap {
 		$parser         = new GetTextParser();
 		$this->patterns = $parser->patterns;
 		$this->admin_menu();
-
-		$mapper_helper = new MapperHelper();
-		$this->mapper_state = $mapper_helper->set_state( $this->mapper_state );
+		new MapperHelper();
 
 		new MessageMapper();
-
 	}
 
 	public function admin_menu() {
 		$menu_page = new SettingsPage( self::$slug );
-
 		new SettingPageMessages( $menu_page, $this->patterns );
-
 	}
-
 
 }
 
