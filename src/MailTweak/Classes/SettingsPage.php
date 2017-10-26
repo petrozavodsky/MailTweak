@@ -183,6 +183,8 @@ class SettingsPage {
 
 	public function add_settings_page() {
 
+
+
 		$page = add_menu_page(
 			__( 'Mail Tweak Settings', $this->textdomine ),
 			__( 'Mail Tweak', $this->textdomine ),
@@ -201,21 +203,24 @@ class SettingsPage {
 				submit_button();
 				echo "</form>";
 				echo "</div>";
+
 			},
 			'dashicons-format-chat',
 			85
 		);
+
+		new SettingsPageAssets( 'mail-tweak_page_mail-tweak-smtp', $this->version );
+
 		$this->add_submenu_page();
 
-		new TestAjaxMessage($page, $this->version);
+		new TestAjaxMessage( $page, $this->version );
 
-		new SettingsPageAssets( $page, $this->version );
 	}
 
 	public function add_submenu_page() {
 		add_submenu_page(
 			$this->slug,
-			__( 'SMTP Settings', $this->textdomine ),
+			__( 'SMTP Settings page', $this->textdomine ),
 			__( 'SMTP', $this->textdomine ),
 			'activate_plugins',
 			$this->slug_smtp_menu,

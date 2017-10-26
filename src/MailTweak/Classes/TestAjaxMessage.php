@@ -2,22 +2,59 @@
 
 namespace MailTweak\Classes;
 
+use MailTweak;
 use MailTweak\Utils\Assets;
 use MailTweak\Utils\Ajax;
 
 class TestAjaxMessage extends Ajax {
 	use Assets;
 
+	public static $action_name = 'MailTweakTestAjaxMessage';
 	private $version;
 	private $page;
 
 
 	function __construct( $page, $version ) {
 		$this->page;
-		$this->js( 'admin_print_styles-' . $page );
-		parent::__construct( "MailTweakTestAjaxMessage", 'admin' );
+		$this->js( 'admin_print_scripts-mail-tweak_page_mail-tweak-smtp-' . $page );
+		parent::__construct( self::$action_name, 'admin' );
+
+		add_action( 'MailTweak__settings_form_before', [ $this, 'ajax_form' ], 10, 1 );
 	}
 
+	public function ajax_form( $page ) {
+		if ( "mail-tweak-smtp" === $page ):
+			?>
+            <div class="<?php echo self::$action_name; ?>" data-action="<?php echo $this->ajax_url_action;?>" >
+            <div class="<?php echo self::$action_name; ?>__wrap">
+                <div class="<?php echo self::$action_name; ?>__item">
+                    <h3>
+						<?php _e( 'Send test email',MailTweak::$textdomine ); ?>
+                    </h3>
+                </div>
+                <div class="<?php echo self::$action_name; ?>__item">
+                    <input type="email" placeholder="<?php _e( 'Email', MailTweak::$textdomine ); ?>"
+                           class="<?php echo self::$action_name; ?>__input" data-id="subject"/>
+                </div>
+                <div class="<?php echo self::$action_name; ?>__item">
+                    <input type="text" placeholder="<?php _e( 'Subject', MailTweak::$textdomine ); ?>"
+                           class="<?php echo self::$action_name; ?>__input" data-id="subject"/>
+                </div>
+                <div class="<?php echo self::$action_name; ?>__item">
+
+                    <textarea placeholder="<?php _e( 'Message', MailTweak::$textdomine ); ?>"
+                              class="<?php echo self::$action_name; ?>__textarea" data-id="message"></textarea>
+                </div>
+                <div class="<?php echo self::$action_name; ?>__item">
+                    <button type="button" class="button button-primary" data-id="button">
+						<?php _e( 'Send test email', MailTweak::$textdomine ); ?>
+                    </button>
+                </div>
+            </div>
+            </div>
+		<?php
+		endif;
+	}
 
 	public function js( $position ) {
 		$handle = $this->addJs(
@@ -27,13 +64,6 @@ class TestAjaxMessage extends Ajax {
 			$this->version
 		);
 
-		$this->vars_ajax(
-			$handle,
-			[
-				'ajax_url'        => $this->ajax_url,
-				'ajax_url_action' => $this->ajax_url_action,
-			]
-		);
 	}
 
 	/**
