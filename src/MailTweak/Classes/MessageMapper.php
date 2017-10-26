@@ -13,9 +13,8 @@ class MessageMapper {
 		$this->options_smpt = Options::get( 'all' );
 		add_filter( 'MailTweak__message_send', [ $this, 'init' ], 10, 3 );
 
-		d(
-			get_option( 'vv' )
-		);
+//		$tt = get_option( 'tt' );
+//		$this->init( $tt[0], $tt[1], $tt[2] );
 	}
 
 	public function init( $mail_args, $type, $raw_text ) {
@@ -69,7 +68,7 @@ class MessageMapper {
 	}
 
 	public function option_extractor( $field, $type, $options = [] ) {
-
+		global $MailTweak_MapperHelper_tmp;
 
 		if ( is_array( $options ) && 0 < count( $options ) && array_key_exists( $type . '-' . $field, $options ) ) {
 
@@ -88,10 +87,11 @@ class MessageMapper {
 			}
 
 			return apply_filters(
-				'MailTweak__message_mapper_filds_extractor_filter',
+				'MailTweak__message_mapper_fields_extractor_filter',
 				$options[ $type . '-' . $field ],
 				$type,
-				$field
+				$field,
+				$MailTweak_MapperHelper_tmp
 			);
 		}
 

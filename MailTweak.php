@@ -16,6 +16,7 @@ use MailTweak\Base\Wrap;
 use MailTweak\Classes\GetTextParser;
 use MailTweak\Classes\MailProxy;
 use MailTweak\Classes\MapperHelper;
+use MailTweak\Classes\MessageMailShortcodes;
 use MailTweak\Classes\MessageMapper;
 use MailTweak\Classes\SettingPageMessages;
 use MailTweak\Classes\SettingsPage;
@@ -35,8 +36,8 @@ class MailTweak extends Wrap {
 		$parser         = new GetTextParser();
 		$this->patterns = $parser->patterns;
 		$this->admin_menu();
+		new MessageMailShortcodes();
 		new MapperHelper();
-
 		new MessageMapper();
 	}
 
