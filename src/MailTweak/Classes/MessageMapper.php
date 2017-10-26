@@ -13,8 +13,7 @@ class MessageMapper {
 		$this->options_smpt = Options::get( 'all' );
 		add_filter( 'MailTweak__message_send', [ $this, 'init' ], 10, 3 );
 
-//		$tt = get_option( 'tt' );
-//		$this->init( $tt[0], $tt[1], $tt[2] );
+
 	}
 
 	public function init( $mail_args, $type, $raw_text ) {
