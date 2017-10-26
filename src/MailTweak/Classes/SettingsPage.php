@@ -207,6 +207,7 @@ class SettingsPage {
 		);
 		$this->add_submenu_page();
 
+		new TestAjaxMessage();
 
 		new SettingsPageAssets( $page, $this->version );
 	}
