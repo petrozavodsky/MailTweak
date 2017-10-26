@@ -3,58 +3,118 @@
 namespace MailTweak\Classes;
 
 
+use MailTweak;
+
 class MapperHelper {
 
-	private $tmp = [];
+	public static $tags_descriptions = [];
 
 	public function __construct() {
 
-		add_filter( 'retrieve_password_message', [ $this, 'reset_password' ], 10, 4 );
-		add_action( 'retrieve_password_key', [ $this, 'create_new_user' ] );
-		add_filter( 'comment_moderation_headers', [ $this, 'comment_added' ], 10, 2 );
-		add_filter('MailTweak__comment-approved', [$this,'comment_approved'], 10, 3);
-
-		//new_user_register
-		//change_password_alert
+		add_filter( 'retrieve_password_message', [ $this, 'reset_password' ], 1, 4 );
+		add_action( 'retrieve_password_key', [ $this, 'new_user_register' ], 1, 2 );
+		add_filter( 'MailTweak__message_mapper_fields_extractor_filter', [ $this, 'password_changed_alert' ], 1, 2 );
+		add_filter( 'comment_moderation_headers', [ $this, 'comment_added' ], 1, 2 );
+		add_filter( 'MailTweak__comment-approved', [ $this, 'comment_approved' ], 1, 3 );
+		$this->tags_descriptions();
 	}
 
-	public function create_new_user( $user_login, $key ) {
-		$this->tmp ['create_new_user'] = [
-			'link_reset' => '<' . network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user_login ), 'login' ) . '> ',
-			'login'      => $user_login
+	public function tags_descriptions() {
+		self::$tags_descriptions = [
+			'password_changed_alert' => [
+				'password_changed_alert' => __( 'Login', MailTweak::$textdomine )
+			],
+			'new_user_register'      => [
+				'link_confirm' => __( 'Сonfirmation link', MailTweak::$textdomine ),
+				'login'        => __( 'Login', MailTweak::$textdomine )
+			],
+			'reset_password'         => [
+				'link_reset' => __( 'link reset', MailTweak::$textdomine ),
+				'login'      => __( 'Login', MailTweak::$textdomine ),
+			],
+			'comment_added'          => [
+				'link_post'               => __( 'Link post', MailTweak::$textdomine ),
+				'count_comments_waiting' => __( 'The number of comments waiting to be approved', MailTweak::$textdomine ),
+				'comment_content'        => __( 'The text of the comment', MailTweak::$textdomine ),
+				'comment_author'         => __( 'Nick - author of the comment', MailTweak::$textdomine ),
+				'comment_author_email'   => __( 'Author email', MailTweak::$textdomine ),
+				'comment_author_url'     => __( 'Author site', MailTweak::$textdomine ),
+				'comment_author_ip'      => __( 'Author IP', MailTweak::$textdomine ),
+				'links_comment_approve'  => __( 'To approve the review', MailTweak::$textdomine ),
+				'links_comment_del'      => __( 'Link - delete comment', MailTweak::$textdomine ),
+				'links_comment_spam'     => __( 'Link - spam ', MailTweak::$textdomine ),
+				'links_all_waiting'      => __( 'Link - comments', MailTweak::$textdomine )
+			],
+			'comment_approved'       => [
+				'link_comment' => __( 'Link comment', MailTweak::$textdomine ),
+				'login'        => __( 'Login', MailTweak::$textdomine )
+			]
 		];
+
+	}
+
+	public function password_changed_alert( $value, $type ) {
+		global $wpdb;
+
+		$user_login                                                      = $wpdb->get_var(
+			"SELECT user_nicename FROM {$wpdb->users} ORDER BY user_registered DESC"
+		);
+		$GLOBALS['MailTweak_MapperHelper_tmp']['password_changed_alert'] = [
+			'login' => $user_login
+		];
+
+		return $value;
+	}
+
+	public function new_user_register( $user_login, $key ) {
+		$GLOBALS['MailTweak_MapperHelper_tmp']['new_user_register'] = [
+			'link_confirm' => '<' . network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user_login ), 'login' ) . '> ',
+			'login'        => $user_login
+		];
+
 	}
 
 	public function reset_password( $message, $key, $user_login, $user_data ) {
-		$this->tmp ['reset_password'] = [
+		$GLOBALS['MailTweak_MapperHelper_tmp']['reset_password'] = [
 			'link_reset' => '<' . network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user_login ), 'login' ) . ">",
 			'login'      => $user_login
 		];
+
+		return $message;
 	}
 
 	public function comment_added( $message_headers, $comment_id ) {
 		global $wpdb;
+
 		$comments_waiting = $wpdb->get_var( "SELECT count(comment_ID) FROM $wpdb->comments WHERE comment_approved = '0'" );
+		$comment          = get_comment( $comment_id );
+		$comment_content  = wp_specialchars_decode( $comment->comment_content );
 
-		$this->tmp ['comment_added'] = [
-			'link_post'         => '',
-			'link_approve'      => '',
-			'link_delete'       => '',
-			'link_spam'         => '',
-			'links_all_waiting' => ''
+		$GLOBALS['MailTweak_MapperHelper_tmp']['comment_added'] = [
+			'link_post'               => get_permalink( $comment->comment_post_ID ),
+			'count_comments_waiting' => $comments_waiting,
+			'comment_content'        => $comment_content,
+			'comment_author'         => $comment->comment_author,
+			'comment_author_email'   => $comment->comment_author_email,
+			'comment_author_url'     => $comment->comment_author_url,
+			'comment_author_ip'      => $comment->comment_author_IP,
+			'links_comment_approve'  => admin_url( "comment.php?action=approve&c={$comment_id}#wpbody-content" ),
+			'links_comment_del'      => ( EMPTY_TRASH_DAYS ? admin_url( "comment.php?action=trash&c={$comment_id}#wpbody-content" ) : admin_url( "comment.php?action=delete&c={$comment_id}#wpbody-content" ) ),
+			'links_comment_spam'     => admin_url( "comment.php?action=delete&c={$comment_id}#wpbody-content" ),
+			'links_all_waiting'      => admin_url( "edit-comments.php?comment_status=moderated#wpbody-content" ),
+
 		];
+
+
 	}
 
-	public function comment_approved($message, $comment_author, $comment_link){
-		$this->tmp ['comment_approved'] = [
+	public function comment_approved( $message, $comment_author, $comment_link ) {
+		$GLOBALS['MailTweak_MapperHelper_tmp']['comment_approved'] = [
 			'link_comment' => $comment_link,
-			'login'      => $comment_author
+			'login'        => $comment_author
 		];
-	}
 
-	public function set_state( $state ) {
-
-		return $state;
+		return $message;
 	}
 
 

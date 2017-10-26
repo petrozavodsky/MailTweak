@@ -48,4 +48,3 @@ class MailProxy {
 		do_action_ref_array( 'MailTweak__phpmailer', array( &$phpmailer ) );
 	}
 }
-

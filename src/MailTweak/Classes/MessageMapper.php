@@ -12,9 +12,6 @@ class MessageMapper {
 	public function __construct() {
 		$this->options_smpt = Options::get( 'all' );
 		add_filter( 'MailTweak__message_send', [ $this, 'init' ], 10, 3 );
-		$t = get_option( 'tt' );
-		d($t);
-		$this->init( $t[0], $t[1], $t[2] );
 	}
 
 	public function init( $mail_args, $type, $raw_text ) {
@@ -46,17 +43,20 @@ class MessageMapper {
 			}
 
 			add_action( 'MailTweak__phpmailer', function ( $phpmailer ) use ( $from_name, $from ) {
-				$phpmailer->From     = $from;
-				$phpmailer->FromName = $from_name;
-				$phpmailer->AddReplyTo( $from, $from_name );
+				if ( false !== $from ) {
+					$phpmailer->From = $from;
+				}
+
+				if ( false !== $from_name ) {
+					$phpmailer->FromName = $from_name;
+				}
+
+				$phpmailer->AddReplyTo( $phpmailer->From, $phpmailer->FromName );
+
 			} );
 
-			$mail_args['headers'] = [
-				"From: {$from_name} <{$from}>"
-			];
-
-			apply_filters('MailTweak__phpmailer' ,$mail_args, $type, $raw_text);
 		}
+
 
 		return $mail_args;
 	}
@@ -79,8 +79,12 @@ class MessageMapper {
 				}
 			}
 
-
-			return $options[ $type . '-' . $field ];
+			return apply_filters(
+				'MailTweak__message_mapper_fields_extractor_filter',
+				$options[ $type . '-' . $field ],
+				$type,
+				$field
+			);
 		}
 
 		return false;

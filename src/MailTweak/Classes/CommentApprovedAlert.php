@@ -23,7 +23,6 @@ class CommentApprovedAlert {
 
 		$message = sprintf( __( 'Hi %1$s, comment %2$s has been approved', $this->textdomine ), $comment->comment_author, get_comment_link( $comment ) );
 
-
 		wp_mail(
 			$comment->comment_author_email,
 			$this->mail_subject,
