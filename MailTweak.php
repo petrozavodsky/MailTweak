@@ -23,19 +23,22 @@ class MailTweak extends Wrap {
 	public $version = '1.0.0';
 	public static $textdomine;
 	public static $slug = 'mail-tweak';
+	public $patterns = [];
 
 	public function __construct() {
 		self::$textdomine = $this->setTextdomain();
 		new MailProxy();
-		new GetTextParser();
 		new CommentApprovedAlert();
+		$parser = new GetTextParser();
+		$this->patterns = $parser->paterns;
+
 		$this->admin_menu();
 	}
 
 	public function admin_menu() {
 		$menu_page = new SettingsPage( self::$slug );
 
-		new SettingPageMessages( $menu_page );
+		new SettingPageMessages( $menu_page , $this->patterns );
 
 	}
 
