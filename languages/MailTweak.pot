@@ -1,0 +1,182 @@
+# Copyright (C) 2017 MailTweak
+# This file is distributed under the same license as the MailTweak package.
+msgid ""
+msgstr ""
+"Project-Id-Version: MailTweak\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/MailTweak/Classes/CommentApprovedAlert.php:13
+msgid "Comment has been approved"
+msgstr ""
+
+#: src/MailTweak/Classes/CommentApprovedAlert.php:24
+msgid "Hi %1$s, comment %2$s has been approved"
+msgstr ""
+
+#: src/MailTweak/Classes/GetTextParser.php:18
+msgid "New user create (admin alert)"
+msgstr ""
+
+#: src/MailTweak/Classes/GetTextParser.php:19
+msgid "New user register (admin alert)"
+msgstr ""
+
+#: src/MailTweak/Classes/GetTextParser.php:20
+msgid "User password change (admin alert)"
+msgstr ""
+
+#: src/MailTweak/Classes/GetTextParser.php:21
+msgid "Resset password (user alert)"
+msgstr ""
+
+#: src/MailTweak/Classes/GetTextParser.php:22
+msgid "New password created (user alert)"
+msgstr ""
+
+#: src/MailTweak/Classes/GetTextParser.php:23
+msgid "Comment added (admin alert)"
+msgstr ""
+
+#: src/MailTweak/Classes/GetTextParser.php:24
+msgid "Comment Approved (user alert)"
+msgstr ""
+
+#: src/MailTweak/Classes/MapperHelper.php:25, src/MailTweak/Classes/MapperHelper.php:29, src/MailTweak/Classes/MapperHelper.php:33, src/MailTweak/Classes/MapperHelper.php:50
+msgid "Login"
+msgstr ""
+
+#: src/MailTweak/Classes/MapperHelper.php:28
+msgid "Сonfirmation link"
+msgstr ""
+
+#: src/MailTweak/Classes/MapperHelper.php:32
+msgid "link reset"
+msgstr ""
+
+#: src/MailTweak/Classes/MapperHelper.php:36
+msgid "Link post"
+msgstr ""
+
+#: src/MailTweak/Classes/MapperHelper.php:37
+msgid "The number of comments waiting to be approved"
+msgstr ""
+
+#: src/MailTweak/Classes/MapperHelper.php:38
+msgid "The text of the comment"
+msgstr ""
+
+#: src/MailTweak/Classes/MapperHelper.php:39
+msgid "Nick - author of the comment"
+msgstr ""
+
+#: src/MailTweak/Classes/MapperHelper.php:40
+msgid "Author email"
+msgstr ""
+
+#: src/MailTweak/Classes/MapperHelper.php:41
+msgid "Author site"
+msgstr ""
+
+#: src/MailTweak/Classes/MapperHelper.php:42
+msgid "Author IP"
+msgstr ""
+
+#: src/MailTweak/Classes/MapperHelper.php:43
+msgid "To approve the review"
+msgstr ""
+
+#: src/MailTweak/Classes/MapperHelper.php:44
+msgid "Link - delete comment"
+msgstr ""
+
+#: src/MailTweak/Classes/MapperHelper.php:45
+msgid "Link - spam "
+msgstr ""
+
+#: src/MailTweak/Classes/MapperHelper.php:46
+msgid "Link - comments"
+msgstr ""
+
+#: src/MailTweak/Classes/MapperHelper.php:49
+msgid "Link comment"
+msgstr ""
+
+#: src/MailTweak/Classes/SettingPageMessages.php:54
+msgid "Wildcards"
+msgstr ""
+
+#: src/MailTweak/Classes/SettingPageMessages.php:78
+msgid "To use"
+msgstr ""
+
+#: src/MailTweak/Classes/SettingPageMessages.php:94
+msgid "From email"
+msgstr ""
+
+#: src/MailTweak/Classes/SettingPageMessages.php:106
+msgid "From name"
+msgstr ""
+
+#: src/MailTweak/Classes/SettingPageMessages.php:118
+msgid "Message subject"
+msgstr ""
+
+#: src/MailTweak/Classes/SettingPageMessages.php:131, src/MailTweak/Classes/TestAjaxMessage.php:54
+msgid "Message"
+msgstr ""
+
+#: src/MailTweak/Classes/SettingsPage.php:54
+msgid "SMTP sender options"
+msgstr ""
+
+#: src/MailTweak/Classes/SettingsPage.php:189
+msgid "Mail Tweak Settings"
+msgstr ""
+
+#: src/MailTweak/Classes/SettingsPage.php:190
+msgid "Mail Tweak"
+msgstr ""
+
+#: src/MailTweak/Classes/SettingsPage.php:222
+msgid "SMTP Settings page"
+msgstr ""
+
+#: src/MailTweak/Classes/SettingsPage.php:223
+msgid "SMTP"
+msgstr ""
+
+#: src/MailTweak/Classes/TestAjaxMessage.php:35
+msgid "Sending..."
+msgstr ""
+
+#: src/MailTweak/Classes/TestAjaxMessage.php:41, src/MailTweak/Classes/TestAjaxMessage.php:59
+msgid "Send test email"
+msgstr ""
+
+#: src/MailTweak/Classes/TestAjaxMessage.php:45
+msgid "Email"
+msgstr ""
+
+#: src/MailTweak/Classes/TestAjaxMessage.php:49
+msgid "Subject"
+msgstr ""
+
+#: src/MailTweak/Classes/TestAjaxMessage.php:99
+msgid "All fields required"
+msgstr ""
+
+#: src/MailTweak/Classes/TestAjaxMessage.php:108
+msgid "Email success sent"
+msgstr ""
+
+#: src/MailTweak/Classes/TestAjaxMessage.php:115
+msgid "Error sending"
+msgstr ""

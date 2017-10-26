@@ -5,7 +5,8 @@ const gulp = require('gulp'),
     del = require('del'),
     path = require('path'),
     imageminJpegRecompress = require('imagemin-jpeg-recompress'),
-    imageminPngquant = require('imagemin-pngquant');
+    imageminPngquant = require('imagemin-pngquant'),
+    wpPot = require('gulp-wp-pot');
 
 const plugin_src = {
     js: [
@@ -31,7 +32,7 @@ const plugin_src = {
             '**/*.php',
             '!vendor/**/*.php'
         ],
-        dest: './languages/',
+        dest: './languages/'
     }
 };
 
