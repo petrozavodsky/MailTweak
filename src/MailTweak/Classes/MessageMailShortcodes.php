@@ -5,13 +5,13 @@ namespace MailTweak\Classes;
 
 class MessageMailShortcodes {
 
-	private $shortcode_name = 'mt_variable';
+	public static $shortcode_name = 'mt_variable';
 	private $type;
 
 	public function __construct() {
 
 		add_filter( 'MailTweak__message_mapper_fields_extractor_filter', [ $this, 'filter' ], 10, 4 );
-		add_shortcode( $this->shortcode_name, [ $this, 'shortcode' ] );
+		add_shortcode( self::$shortcode_name, [ $this, 'shortcode' ] );
 
 	}
 

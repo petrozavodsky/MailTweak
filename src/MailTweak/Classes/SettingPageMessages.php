@@ -41,9 +41,35 @@ class SettingPageMessages {
 		$section = $this->option_base . "-" . $id;
 
 		add_settings_section(
+		/**
+		 *
+		 */
 			$section,
 			$section_title,
-			'',
+			function () use ( $id ) {
+				$shortcode = MessageMailShortcodes::$shortcode_name;
+				if ( array_key_exists( $id, MapperHelper::$tags_descriptions ) ) {
+					?>
+                    <strong>
+						<?php _e( "Wildcards", MailTweak::$textdomine ); ?>
+                    </strong>
+                    <br>
+					<?php
+
+					foreach ( MapperHelper::$tags_descriptions[ $id ] as $key => $val ) :
+						?>
+                        <p>
+							<?php echo $val; ?> -
+                        <pre>[<?php echo $shortcode; ?> type='<?php echo $key; ?>']</pre>
+
+                        </p>
+
+					<?php
+					endforeach;
+				}
+			},
+
+
 			$this->slug
 		);
 
@@ -101,14 +127,14 @@ class SettingPageMessages {
 
 
 		add_settings_field(
-			$id."-message",
+			$id . "-message",
 			__( 'Message', $this->textdomine ),
 			[ $this, 'option_display_settings' ],
 			$this->slug,
 			$section,
 			[
 				'type' => 'texteditor',
-				'id'   => $id."-message",
+				'id'   => $id . "-message",
 			]
 		);
 
@@ -134,7 +160,43 @@ class SettingPageMessages {
 
 	public function option_display_settings( $args ) {
 
-		$this->form_block($args, $this->option_base ,[]);
+		$this->form_block( $args, $this->option_base, [
+			'new_user_register-status'         => "off",
+			'new_user_register-email'          => "",
+			'new_user_register-from-name'      => "",
+			'new_user_register-subject'        => "",
+			'new_user_register-message'        => "",
+			'create_new_user-status'           => "off",
+			'create_new_user-email'            => "",
+			'create_new_user-from-name'        => "",
+			'create_new_user-subject'          => "",
+			'create_new_user-message'          => "",
+			'password_changed_alert-status'    => "off",
+			'password_changed_alert-email'     => "",
+			'password_changed_alert-from-name' => "",
+			'password_changed_alert-subject'   => "",
+			'password_changed_alert-message'   => "",
+			'reset_password-status'            => "off",
+			'reset_password-email'             => "",
+			'reset_password-from-name'         => "",
+			'reset_password-subject'           => "",
+			'reset_password-message'           => "",
+			'change_password_alert-status'     => "off",
+			'change_password_alert-email'      => "",
+			'change_password_alert-from-name'  => "",
+			'change_password_alert-subject'    => "",
+			'change_password_alert-message'    => "",
+			'comment_added-status'             => "off",
+			'comment_added-email'              => "",
+			'comment_added-from-name'          => "",
+			'comment_added-subject'            => "",
+			'comment_added-message'            => "",
+			'comment_approved-status'          => "off",
+			'comment_approved-email'           => "",
+			'comment_approved-from-name'       => "",
+			'comment_approved-subject'         => "",
+			'comment_approved-message'         => "",
+		] );
 	}
 
 
