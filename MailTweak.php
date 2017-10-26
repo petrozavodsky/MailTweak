@@ -21,6 +21,7 @@ use MailTweak\Classes\MessageMapper;
 use MailTweak\Classes\SettingPageMessages;
 use MailTweak\Classes\SettingsPage;
 use MailTweak\Classes\CommentApprovedAlert;
+use MailTweak\Classes\TestAjaxMessage;
 
 class MailTweak extends Wrap {
 	public $version = '1.0.0';
@@ -39,6 +40,8 @@ class MailTweak extends Wrap {
 		new MessageMailShortcodes();
 		new MapperHelper();
 		new MessageMapper();
+
+		new TestAjaxMessage(  $this->version );
 	}
 
 	public function admin_menu() {
