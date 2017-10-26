@@ -20,7 +20,7 @@ class GetTextParser {
 			'[%s] Password Reset'                     => [ 'reset_password', __( 'Resset password', MailTweak::$textdomine ) ],
 			'[%s] Notice of Password Change'          => [ 'change_password_alert', __( 'New password created (user alert)', MailTweak::$textdomine ) ],
 			'[%s] Your username and password info'    => [ 'create_new_user', __( 'New password register (admin alert)', MailTweak::$textdomine ) ],
-			'[%1$s] Please moderate: \"%2$s\"'        => [ 'comment_added', __( 'Comment added', MailTweak::$textdomine ) ],
+			'[%1$s] Please moderate: "%2$s"'          => [ 'comment_added', __( 'Comment added', MailTweak::$textdomine ) ],
 			'Hi %1$s, comment %2$s has been approved' => [ 'comment_approved', __( 'Comment Approved', MailTweak::$textdomine ) ]
 		];
 
