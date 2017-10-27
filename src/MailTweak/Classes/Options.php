@@ -29,13 +29,5 @@ class Options {
 		return $options;
 	}
 
-	public static function update( $array = [] ) {
-
-	}
-
-
-	public static function flush() {
-
-	}
 
 }
