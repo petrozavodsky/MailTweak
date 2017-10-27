@@ -13,6 +13,10 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: MailTweak.php:61
+msgid "SMTP Settings"
+msgstr ""
+
 #: src/MailTweak/Classes/CommentApprovedAlert.php:13
 msgid "Comment has been approved"
 msgstr ""
