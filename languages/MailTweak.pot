@@ -13,8 +13,20 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: MailTweak.php:61
+#: MailTweak.php:64
 msgid "SMTP Settings"
+msgstr ""
+
+#: src/MailTweak/Classes/AddEditorButtons.php:39
+msgid "MailTweak shortcode"
+msgstr ""
+
+#: src/MailTweak/Classes/AddEditorButtons.php:42
+msgid "Shortcode type (see help):"
+msgstr ""
+
+#: src/MailTweak/Classes/AddEditorButtons.php:80
+msgid "MailTweak shortcodes"
 msgstr ""
 
 #: src/MailTweak/Classes/CommentApprovedAlert.php:13
@@ -53,87 +65,107 @@ msgstr ""
 msgid "Comment Approved (user alert)"
 msgstr ""
 
-#: src/MailTweak/Classes/MapperHelper.php:25, src/MailTweak/Classes/MapperHelper.php:29, src/MailTweak/Classes/MapperHelper.php:33, src/MailTweak/Classes/MapperHelper.php:50
+#: src/MailTweak/Classes/MapperHelper.php:27
+msgid "Password Changed Alert"
+msgstr ""
+
+#: src/MailTweak/Classes/MapperHelper.php:28, src/MailTweak/Classes/MapperHelper.php:32, src/MailTweak/Classes/MapperHelper.php:36, src/MailTweak/Classes/MapperHelper.php:53, src/MailTweak/Classes/MapperHelper.php:59, src/MailTweak/Classes/MapperHelper.php:63, src/MailTweak/Classes/MapperHelper.php:67, src/MailTweak/Classes/MapperHelper.php:84
 msgid "Login"
 msgstr ""
 
-#: src/MailTweak/Classes/MapperHelper.php:28
+#: src/MailTweak/Classes/MapperHelper.php:30
+msgid "New User Register"
+msgstr ""
+
+#: src/MailTweak/Classes/MapperHelper.php:31, src/MailTweak/Classes/MapperHelper.php:62
 msgid "Сonfirmation link"
 msgstr ""
 
-#: src/MailTweak/Classes/MapperHelper.php:32
+#: src/MailTweak/Classes/MapperHelper.php:34
+msgid "Reset password"
+msgstr ""
+
+#: src/MailTweak/Classes/MapperHelper.php:35, src/MailTweak/Classes/MapperHelper.php:66
 msgid "link reset"
 msgstr ""
 
-#: src/MailTweak/Classes/MapperHelper.php:36
+#: src/MailTweak/Classes/MapperHelper.php:38
+msgid "Comment added"
+msgstr ""
+
+#: src/MailTweak/Classes/MapperHelper.php:39, src/MailTweak/Classes/MapperHelper.php:70
 msgid "Link post"
 msgstr ""
 
-#: src/MailTweak/Classes/MapperHelper.php:37
+#: src/MailTweak/Classes/MapperHelper.php:40, src/MailTweak/Classes/MapperHelper.php:71
 msgid "The number of comments waiting to be approved"
 msgstr ""
 
-#: src/MailTweak/Classes/MapperHelper.php:38
+#: src/MailTweak/Classes/MapperHelper.php:41, src/MailTweak/Classes/MapperHelper.php:72
 msgid "The text of the comment"
 msgstr ""
 
-#: src/MailTweak/Classes/MapperHelper.php:39
+#: src/MailTweak/Classes/MapperHelper.php:42, src/MailTweak/Classes/MapperHelper.php:73
 msgid "Nick - author of the comment"
 msgstr ""
 
-#: src/MailTweak/Classes/MapperHelper.php:40
+#: src/MailTweak/Classes/MapperHelper.php:43, src/MailTweak/Classes/MapperHelper.php:74
 msgid "Author email"
 msgstr ""
 
-#: src/MailTweak/Classes/MapperHelper.php:41
+#: src/MailTweak/Classes/MapperHelper.php:44, src/MailTweak/Classes/MapperHelper.php:75
 msgid "Author site"
 msgstr ""
 
-#: src/MailTweak/Classes/MapperHelper.php:42
+#: src/MailTweak/Classes/MapperHelper.php:45, src/MailTweak/Classes/MapperHelper.php:76
 msgid "Author IP"
 msgstr ""
 
-#: src/MailTweak/Classes/MapperHelper.php:43
+#: src/MailTweak/Classes/MapperHelper.php:46, src/MailTweak/Classes/MapperHelper.php:77
 msgid "To approve the review"
 msgstr ""
 
-#: src/MailTweak/Classes/MapperHelper.php:44
+#: src/MailTweak/Classes/MapperHelper.php:47, src/MailTweak/Classes/MapperHelper.php:78
 msgid "Link - delete comment"
 msgstr ""
 
-#: src/MailTweak/Classes/MapperHelper.php:45
+#: src/MailTweak/Classes/MapperHelper.php:48, src/MailTweak/Classes/MapperHelper.php:79
 msgid "Link - spam "
 msgstr ""
 
-#: src/MailTweak/Classes/MapperHelper.php:46
+#: src/MailTweak/Classes/MapperHelper.php:49, src/MailTweak/Classes/MapperHelper.php:80
 msgid "Link - comments"
 msgstr ""
 
-#: src/MailTweak/Classes/MapperHelper.php:49
+#: src/MailTweak/Classes/MapperHelper.php:51
+msgid "Comment Approved"
+msgstr ""
+
+#: src/MailTweak/Classes/MapperHelper.php:52, src/MailTweak/Classes/MapperHelper.php:83
 msgid "Link comment"
 msgstr ""
 
-#: src/MailTweak/Classes/SettingPageMessages.php:54
+#: src/MailTweak/Classes/SettingPageMessages.php:53
 msgid "Wildcards"
 msgstr ""
 
-#: src/MailTweak/Classes/SettingPageMessages.php:78
+#: src/MailTweak/Classes/SettingPageMessages.php:75
 msgid "To use"
 msgstr ""
 
-#: src/MailTweak/Classes/SettingPageMessages.php:94
+#: src/MailTweak/Classes/SettingPageMessages.php:89
 msgid "From email"
 msgstr ""
 
-#: src/MailTweak/Classes/SettingPageMessages.php:106
+#: src/MailTweak/Classes/SettingPageMessages.php:101
 msgid "From name"
 msgstr ""
 
-#: src/MailTweak/Classes/SettingPageMessages.php:118
+#: src/MailTweak/Classes/SettingPageMessages.php:113
 msgid "Message subject"
 msgstr ""
 
-#: src/MailTweak/Classes/SettingPageMessages.php:131, src/MailTweak/Classes/TestAjaxMessage.php:54
+#: src/MailTweak/Classes/SettingPageMessages.php:126, src/MailTweak/Classes/TestAjaxMessage.php:54
 msgid "Message"
 msgstr ""
 
