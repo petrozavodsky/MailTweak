@@ -18,6 +18,7 @@ new Autoloader( __FILE__, 'MailTweak' );
 
 use MailTweak\Base\Wrap;
 use MailTweak\Classes\AddEditorButtons;
+use MailTweak\Classes\ClassHelpTab;
 use MailTweak\Classes\GetTextParser;
 use MailTweak\Classes\MailProxy;
 use MailTweak\Classes\MapperHelper;
@@ -47,6 +48,7 @@ class MailTweak extends Wrap {
 		new MessageMapper();
 		new AddEditorButtons();
 		new TestAjaxMessage( $this->version );
+		new ClassHelpTab();
 
 		add_filter( 'plugin_action_links', [ $this, 'settings_link' ], 10, 2 );
 	}

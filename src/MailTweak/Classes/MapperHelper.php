@@ -9,6 +9,7 @@ class MapperHelper {
 
 	public static $tags_descriptions = [];
 	public static $tags_descriptions_scripts = [];
+	public static $tags_descriptions_help_tab = [];
 
 	public function __construct() {
 
@@ -21,6 +22,38 @@ class MapperHelper {
 	}
 
 	public function tags_descriptions() {
+
+		self::$tags_descriptions_help_tab = [
+			__( 'Password Changed Alert', MailTweak::$textdomine ) => [
+				'password_changed_alert' => __( 'Login', MailTweak::$textdomine )
+			],
+			__( 'New User Register', MailTweak::$textdomine )      => [
+				'link_confirm' => __( 'Сonfirmation link', MailTweak::$textdomine ),
+				'login'        => __( 'Login', MailTweak::$textdomine )
+			],
+			__( 'Reset password', MailTweak::$textdomine )         => [
+				'link_reset' => __( 'link reset', MailTweak::$textdomine ),
+				'login'      => __( 'Login', MailTweak::$textdomine ),
+			],
+			__( 'Comment added', MailTweak::$textdomine )          => [
+				'link_post'              => __( 'Link post', MailTweak::$textdomine ),
+				'count_comments_waiting' => __( 'The number of comments waiting to be approved', MailTweak::$textdomine ),
+				'comment_content'        => __( 'The text of the comment', MailTweak::$textdomine ),
+				'comment_author'         => __( 'Nick - author of the comment', MailTweak::$textdomine ),
+				'comment_author_email'   => __( 'Author email', MailTweak::$textdomine ),
+				'comment_author_url'     => __( 'Author site', MailTweak::$textdomine ),
+				'comment_author_ip'      => __( 'Author IP', MailTweak::$textdomine ),
+				'links_comment_approve'  => __( 'To approve the review', MailTweak::$textdomine ),
+				'links_comment_del'      => __( 'Link - delete comment', MailTweak::$textdomine ),
+				'links_comment_spam'     => __( 'Link - spam ', MailTweak::$textdomine ),
+				'links_all_waiting'      => __( 'Link - comments', MailTweak::$textdomine )
+			],
+			__( 'Comment Approved', MailTweak::$textdomine )       => [
+				'link_comment' => __( 'Link comment', MailTweak::$textdomine ),
+				'login'        => __( 'Login', MailTweak::$textdomine )
+			]
+		];
+
 		self::$tags_descriptions = [
 			'password_changed_alert' => [
 				'password_changed_alert' => __( 'Login', MailTweak::$textdomine )
