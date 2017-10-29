@@ -19,8 +19,6 @@ trait FormElemetBulder {
 
 		$option = get_option( $option_name, $defaults );
 
-		d($option);
-
 		if ( 0 < count( $defaults ) ) {
 			$option = shortcode_atts(
 				$defaults,
