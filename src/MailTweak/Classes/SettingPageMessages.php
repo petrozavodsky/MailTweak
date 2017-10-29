@@ -26,6 +26,7 @@ class SettingPageMessages {
 		add_action( 'admin_init', [ $this, 'register_options' ] );
 		add_action( 'admin_init', [ $this, 'generate_rows' ] );
 
+
 	}
 
 	public function generate_rows() {
@@ -82,7 +83,7 @@ class SettingPageMessages {
 			[
 				'type' => 'checkbox',
 				'id'   => $id . "-status",
-				'val' => 'on' ,
+				'val'  => 'on',
 			]
 
 		);
