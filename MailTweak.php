@@ -17,6 +17,7 @@ new Autoloader( __FILE__, 'MailTweak' );
 
 
 use MailTweak\Base\Wrap;
+use MailTweak\Classes\AddEditorButtons;
 use MailTweak\Classes\GetTextParser;
 use MailTweak\Classes\MailProxy;
 use MailTweak\Classes\MapperHelper;
@@ -44,7 +45,7 @@ class MailTweak extends Wrap {
 		new MessageMailShortcodes();
 		new MapperHelper();
 		new MessageMapper();
-
+		new AddEditorButtons();
 		new TestAjaxMessage( $this->version );
 
 		add_filter( 'plugin_action_links', [ $this, 'settings_link' ], 10, 2 );
@@ -58,14 +59,15 @@ class MailTweak extends Wrap {
 	function settings_link( $action_links, $plugin_file ) {
 		if ( $plugin_file == plugin_basename( __FILE__ ) ) {
 			$url              = add_query_arg( [ 'page' => 'mail-tweak-smtp' ], admin_url( "admin.php" ) );
-			$ws_settings_link = "<a href='{$url}'>" . __( "SMTP Settings", self::$textdomine ) ."</a>";
+			$ws_settings_link = "<a href='{$url}'>" . __( "SMTP Settings", self::$textdomine ) . "</a>";
 			array_unshift( $action_links, $ws_settings_link );
 		}
+
 		return $action_links;
 	}
 
 
-	public static function uninstall(){
+	public static function uninstall() {
 		delete_option( MailTweak::$slug );
 		delete_option( MailTweak::$slug . "_texts_settings" );
 	}
@@ -73,7 +75,7 @@ class MailTweak extends Wrap {
 
 }
 
-register_uninstall_hook( __FILE__, ['MailTweak', 'uninstall'] );
+register_uninstall_hook( __FILE__, [ 'MailTweak', 'uninstall' ] );
 
 function MailTweak__init() {
 	new MailTweak();

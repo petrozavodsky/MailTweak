@@ -42,9 +42,7 @@ class SettingPageMessages {
 		$section = $this->option_base . "-" . $id;
 
 		add_settings_section(
-		/**
-		 *
-		 */
+
 			$section,
 			$section_title,
 			function () use ( $id ) {
@@ -60,9 +58,7 @@ class SettingPageMessages {
 					foreach ( MapperHelper::$tags_descriptions[ $id ] as $key => $val ) :
 						?>
                         <p>
-							<?php echo $val; ?> -
-                        <pre>[<?php echo $shortcode; ?> type='<?php echo $key; ?>']</pre>
-
+							<?php echo $val; ?> - type: <?php echo $key; ?>
                         </p>
 
 					<?php

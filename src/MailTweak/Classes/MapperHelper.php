@@ -8,6 +8,7 @@ use MailTweak;
 class MapperHelper {
 
 	public static $tags_descriptions = [];
+	public static $tags_descriptions_scripts = [];
 
 	public function __construct() {
 
@@ -33,7 +34,7 @@ class MapperHelper {
 				'login'      => __( 'Login', MailTweak::$textdomine ),
 			],
 			'comment_added'          => [
-				'link_post'               => __( 'Link post', MailTweak::$textdomine ),
+				'link_post'              => __( 'Link post', MailTweak::$textdomine ),
 				'count_comments_waiting' => __( 'The number of comments waiting to be approved', MailTweak::$textdomine ),
 				'comment_content'        => __( 'The text of the comment', MailTweak::$textdomine ),
 				'comment_author'         => __( 'Nick - author of the comment', MailTweak::$textdomine ),
@@ -50,6 +51,23 @@ class MapperHelper {
 				'login'        => __( 'Login', MailTweak::$textdomine )
 			]
 		];
+
+
+		foreach ( self::$tags_descriptions as $key => $val ) {
+
+			$editor_id = mb_strtolower(
+				str_replace(
+					[ '-', '_' ],
+					'',
+					$key
+				)
+			);
+
+			$editor_id = $editor_id . "message";
+
+			self::$tags_descriptions_scripts [ $editor_id ] = $val;
+		}
+
 
 	}
 
@@ -91,7 +109,7 @@ class MapperHelper {
 		$comment_content  = wp_specialchars_decode( $comment->comment_content );
 
 		$GLOBALS['MailTweak_MapperHelper_tmp']['comment_added'] = [
-			'link_post'               => get_permalink( $comment->comment_post_ID ),
+			'link_post'              => get_permalink( $comment->comment_post_ID ),
 			'count_comments_waiting' => $comments_waiting,
 			'comment_content'        => $comment_content,
 			'comment_author'         => $comment->comment_author,

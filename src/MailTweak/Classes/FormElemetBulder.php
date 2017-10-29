@@ -12,7 +12,7 @@ trait FormElemetBulder {
 				'type' => false,
 				'id'   => false,
 				'vals' => [],
-				'val'=> 'on'
+				'val'  => 'on'
 			],
 			$args
 		);
@@ -32,6 +32,7 @@ trait FormElemetBulder {
 			switch ( $args['type'] ) {
 				case 'texteditor':
 					$editor_id = mb_strtolower( str_replace( [ '-', '_' ], '', $args['id'] ) );
+
 					wp_editor(
 						$option[ $args['id'] ],
 						$editor_id,
@@ -43,6 +44,7 @@ trait FormElemetBulder {
 							'tinymce'       => true
 						]
 					);
+
 					break;
 				case 'password':
 					echo "<label for='{$args['id']}'>";
@@ -79,7 +81,7 @@ trait FormElemetBulder {
 					break;
 				case 'checkbox':
 					echo "<label for='{$args['id']}'>";
-					$checked = checked( $option[ $args['id'] ], $args['val'] , false );
+					$checked = checked( $option[ $args['id'] ], $args['val'], false );
 					echo "<input type='checkbox' id='{$args['id']}' {$checked} name='{$option_name}[{$args['id']}]' value='{$args["val"]}' />";
 					echo ( false !== $args['desc'] ) ? "<br /><span class='description'>{$args['desc']}</span>" : "";
 					echo "</label>";
