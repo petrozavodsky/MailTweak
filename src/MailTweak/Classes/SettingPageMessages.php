@@ -80,13 +80,11 @@ class SettingPageMessages {
 			$this->slug,
 			$section,
 			[
-				'type' => 'select',
+				'type' => 'checkbox',
 				'id'   => $id . "-status",
-				'vals' => [
-					'on'  => 'On',
-					'off' => 'Off'
-				]
+				'val' => 'on' ,
 			]
+
 		);
 
 		add_settings_field(

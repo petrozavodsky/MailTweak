@@ -11,12 +11,15 @@ trait FormElemetBulder {
 				'desc' => false,
 				'type' => false,
 				'id'   => false,
-				'vals' => []
+				'vals' => [],
+				'val'=> 'on'
 			],
 			$args
 		);
 
 		$option = get_option( $option_name, $defaults );
+
+		d($option);
 
 		if ( 0 < count( $defaults ) ) {
 			$option = shortcode_atts(
@@ -39,7 +42,7 @@ trait FormElemetBulder {
 							'media_buttons' => false,
 							'textarea_name' => "{$option_name}[{$args['id']}]",
 							'textarea_rows' => 8,
-							'tinymce'       => false
+							'tinymce'       => true
 						]
 					);
 					break;
@@ -75,6 +78,13 @@ trait FormElemetBulder {
 					}
 					echo ( false !== $args['desc'] ) ? $args['desc'] : "";
 					echo "</select>";
+					break;
+				case 'checkbox':
+					echo "<label for='{$args['id']}'>";
+					$checked = checked( $option[ $args['id'] ], $args['val'] , false );
+					echo "<input type='checkbox' id='{$args['id']}' {$checked} name='{$option_name}[{$args['id']}]' value='{$args["val"]}' />";
+					echo ( false !== $args['desc'] ) ? "<br /><span class='description'>{$args['desc']}</span>" : "";
+					echo "</label>";
 					break;
 			}
 		}
