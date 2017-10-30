@@ -45,28 +45,7 @@ class SettingPageMessages {
 
 			$section,
 			$section_title,
-			function () use ( $id ) {
-				$shortcode = MessageMailShortcodes::$shortcode_name;
-				if ( array_key_exists( $id, MapperHelper::$tags_descriptions ) ) {
-					?>
-                    <strong>
-						<?php _e( "Wildcards", MailTweak::$textdomine ); ?>
-                    </strong>
-                    <br>
-					<?php
-
-					foreach ( MapperHelper::$tags_descriptions[ $id ] as $key => $val ) :
-						?>
-                        <p>
-							<?php echo $val; ?> - type: <?php echo $key; ?>
-                        </p>
-
-					<?php
-					endforeach;
-				}
-			},
-
-
+			'',
 			$this->slug
 		);
 
