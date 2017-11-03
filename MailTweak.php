@@ -9,6 +9,10 @@ Version: 1.0.0
 Requires PHP: 5.6
 */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 require_once( "includes/Autoloader.php" );
 
 use MailTweak\Autoloader;
