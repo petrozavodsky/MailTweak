@@ -25,6 +25,7 @@ use MailTweak\Classes\MapperHelper;
 use MailTweak\Classes\MessageMailShortcodes;
 use MailTweak\Classes\MessageMapper;
 use MailTweak\Classes\SettingPageMessages;
+use MailTweak\Classes\SettingsCommonElements;
 use MailTweak\Classes\SettingsPage;
 use MailTweak\Classes\CommentApprovedAlert;
 use MailTweak\Classes\TestAjaxMessage;
@@ -56,6 +57,7 @@ class MailTweak extends Wrap {
 	public function admin_menu() {
 		$menu_page = new SettingsPage( self::$slug );
 		new SettingPageMessages( $menu_page, $this->patterns );
+		new SettingsCommonElements(self::$slug);
 	}
 
 	function settings_link( $action_links, $plugin_file ) {
