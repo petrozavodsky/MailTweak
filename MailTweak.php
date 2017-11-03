@@ -21,6 +21,7 @@ use MailTweak\Classes\AddEditorButtons;
 use MailTweak\Classes\ClassHelpTab;
 use MailTweak\Classes\GetTextParser;
 use MailTweak\Classes\MailProxy;
+use MailTweak\Classes\MailTemplate;
 use MailTweak\Classes\MapperHelper;
 use MailTweak\Classes\MessageMailShortcodes;
 use MailTweak\Classes\MessageMapper;
@@ -52,6 +53,9 @@ class MailTweak extends Wrap {
 		new ClassHelpTab();
 
 		add_filter( 'plugin_action_links', [ $this, 'settings_link' ], 10, 2 );
+
+		new MailTemplate();
+
 	}
 
 	public function admin_menu() {
