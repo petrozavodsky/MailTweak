@@ -8,6 +8,7 @@ use MailTweak;
 class SettingsCommonElements {
 	use FormElemetBulder;
 
+	public static $suffix = '-template_mail';
 	public $slug;
 	public $version;
 	private $textdomine;
@@ -19,9 +20,9 @@ class SettingsCommonElements {
 		$this->slug          = $slug;
 		$this->textdomine    = MailTweak::$textdomine;
 		$this->version       = "1.0.0";
-		$this->slug_sub_menu = $this->slug . '-template_mail';
+		$this->slug_sub_menu = $this->slug . self::$suffix;
 		$this->settings_url  = $this->slug . '-settings';
-		$this->option_base   = $this->slug;
+		$this->option_base   = $this->slug . self::$suffix;
 
 
 		add_action( 'admin_menu', [ $this, 'add_submenu_page' ] );

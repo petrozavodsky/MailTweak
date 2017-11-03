@@ -54,7 +54,7 @@ class MailTweak extends Wrap {
 
 		add_filter( 'plugin_action_links', [ $this, 'settings_link' ], 10, 2 );
 
-		new MailTemplate();
+		new MailTemplate(MailTweak::$slug.SettingsCommonElements::$suffix);
 
 	}
 
