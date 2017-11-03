@@ -24,6 +24,7 @@ class SettingsPage {
 		$this->option_base    = $this->slug;
 
 		add_action( 'admin_menu', [ $this, 'add_settings_page' ] );
+		add_action( 'admin_menu', [ $this, 'add_submenu_page' ] ,12 );
 		add_action( 'admin_init', [ $this, 'register_options' ] );
 		add_action( 'admin_init', [ $this, 'sections' ] );
 		add_action( 'admin_init', [ $this, 'fields' ] );
@@ -210,8 +211,6 @@ class SettingsPage {
 		);
 
 		new SettingsPageAssets( 'mail-tweak_page_mail-tweak-smtp', $this->version );
-
-		$this->add_submenu_page();
 
 
 	}
