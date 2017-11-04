@@ -29,6 +29,7 @@ use MailTweak\Classes\MailTemplate;
 use MailTweak\Classes\MapperHelper;
 use MailTweak\Classes\MessageMailShortcodes;
 use MailTweak\Classes\MessageMapper;
+use MailTweak\Classes\SetContentType;
 use MailTweak\Classes\SettingPageMessages;
 use MailTweak\Classes\SettingsCommonElements;
 use MailTweak\Classes\SettingsPage;
@@ -55,11 +56,9 @@ class MailTweak extends Wrap {
 		new AddEditorButtons();
 		new TestAjaxMessage( $this->version );
 		new ClassHelpTab();
-
 		add_filter( 'plugin_action_links', [ $this, 'settings_link' ], 10, 2 );
-
 		new MailTemplate(MailTweak::$slug.SettingsCommonElements::$suffix);
-
+		new SetContentType();
 	}
 
 	public function admin_menu() {
