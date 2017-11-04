@@ -34,7 +34,7 @@ trait FormElemetBulder {
 					$editor_id = mb_strtolower( str_replace( [ '-', '_' ], '', $args['id'] ) );
 
 					wp_editor(
-						$option[ $args['id'] ],
+						wp_specialchars_decode($option[ $args['id'] ], ENT_QUOTES),
 						$editor_id,
 						[
 							'wpautop'       => false,
