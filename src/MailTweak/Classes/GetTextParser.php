@@ -21,7 +21,9 @@ class GetTextParser {
 			'[%s] Password Reset'                     => [ 'reset_password', __( 'Resset password (user alert)', MailTweak::$textdomine ) ],
 			'[%s] Notice of Password Change'          => [ 'change_password_alert', __( 'New password created (user alert)', MailTweak::$textdomine ) ],
 			'[%1$s] Please moderate: "%2$s"'          => [ 'comment_added', __( 'Comment added (admin alert)', MailTweak::$textdomine ) ],
-			'Hi %1$s, comment %2$s has been approved' => [ 'comment_approved', __( 'Comment Approved (user alert)', MailTweak::$textdomine ) ]
+			'Hi %1$s, comment %2$s has been approved' => [ 'comment_approved', __( 'Comment Approved (user alert)', MailTweak::$textdomine ) ],
+			'[%s] Joining confirmation'               => [ 'joining_confirmation', __( 'Joining confirmation (user alert)', MailTweak::$textdomine ) ],
+			'New WordPress Site'                      => [ 'new_wordpress_site', __( 'New WordPress Site', MailTweak::$textdomine ) ]
 		];
 
 	}

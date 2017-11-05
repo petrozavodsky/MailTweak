@@ -165,11 +165,25 @@ class SettingPageMessages {
 			'comment_added-from-name'          => "",
 			'comment_added-subject'            => "",
 			'comment_added-message'            => "",
+
 			'comment_approved-status'          => "off",
 			'comment_approved-email'           => "",
 			'comment_approved-from-name'       => "",
 			'comment_approved-subject'         => "",
 			'comment_approved-message'         => "",
+
+			'joining_confirmation-status'          => "off",
+			'joining_confirmation-email'           => "",
+			'joining_confirmation-from-name'       => "",
+			'joining_confirmation-subject'         => "",
+			'joining_confirmation-message'         => "",
+
+			'new_wordpress_site-status'          => "off",
+			'new_wordpress_site-email'           => "",
+			'new_wordpress_site-from-name'       => "",
+			'new_wordpress_site-subject'         => "",
+			'new_wordpress_site-message'         => "",
+
 		] );
 	}
 
