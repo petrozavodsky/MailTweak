@@ -27,7 +27,6 @@ trait FormElemetBulder {
 		}
 
 		$option[ $args['id'] ] = esc_attr( stripslashes( $option[ $args['id'] ] ) );
-
 		if ( false !== $args['type'] ) {
 			switch ( $args['type'] ) {
 				case 'texteditor':

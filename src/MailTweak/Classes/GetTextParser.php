@@ -23,8 +23,9 @@ class GetTextParser {
 			'[%1$s] Please moderate: "%2$s"'          => [ 'comment_added', __( 'Comment added (admin alert)', MailTweak::$textdomine ) ],
 			'Hi %1$s, comment %2$s has been approved' => [ 'comment_approved', __( 'Comment Approved (user alert)', MailTweak::$textdomine ) ],
 			'[%s] Joining confirmation'               => [ 'joining_confirmation', __( 'Joining confirmation (user alert)', MailTweak::$textdomine ) ],
-			'New WordPress Site'                      => [ 'new_wordpress_site', __( 'New WordPress Site', MailTweak::$textdomine ) ]
-		];
+			'New WordPress Site'                      => [ 'new_wordpress_site', __( 'New WordPress Site', MailTweak::$textdomine ) ],
+			'[%s] New Site Created'                   => [ 'new_site_created', __( 'New site created', MailTweak::$textdomine ) ],
+			];
 
 	}
 

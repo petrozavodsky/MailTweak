@@ -21,7 +21,26 @@ class MapperHelper {
 		add_filter( 'MailTweak__comment-approved', [ $this, 'comment_approved' ], 1, 3 );
 		add_action( 'invite_user', [ $this, 'joining_confirmation' ], 1, 3 );
 		add_action( 'dbdelta_queries', [ $this, 'user_register' ], 1, 1 );
+		add_action( 'wpmu_signup_blog_notification', [ $this, 'new_site_created' ], 1, 7 );
 		$this->tags_descriptions();
+	}
+
+
+	public function new_site_created( $domain, $path, $title, $user_login, $user_email, $key, $meta ) {
+
+		if ( ! is_subdomain_install() || get_current_network_id() != 1 ) {
+			$activate_url = network_site_url( "wp-activate.php?key=$key" );
+		} else {
+			$activate_url = "http://{$domain}{$path}wp-activate.php?key=$key";
+		}
+
+		$GLOBALS['MailTweak_MapperHelper_tmp']['new_site_created'] = [
+			'activate_url' => $activate_url,
+			'site_url'     => esc_url( "http://{$domain}{$path}" ),
+			'key'          => $key
+		];
+
+		return $domain;
 	}
 
 	public function new_wordpress_site( $user_id ) {
@@ -112,7 +131,7 @@ class MapperHelper {
 	public function tags_descriptions() {
 
 		self::$tags_descriptions_help_tab = [
-			__( 'new_wordpress_site', MailTweak::$textdomine )     => [
+			__( 'new_site_created', MailTweak::$textdomine )     => [
 				'blog_url'  => __( 'Blog url', MailTweak::$textdomine ),
 				'name'      => __( 'User name', MailTweak::$textdomine ),
 				'login_url' => __( 'Login url', MailTweak::$textdomine )
@@ -154,6 +173,7 @@ class MapperHelper {
 		];
 
 		self::$tags_descriptions = [
+
 			'new_wordpress_site'=>[
 				'blog_url'  => __( 'Blog url', MailTweak::$textdomine ),
 				'name'      => __( 'User name', MailTweak::$textdomine ),
